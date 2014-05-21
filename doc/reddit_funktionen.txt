@@ -1,0 +1,24 @@
+Funktionsanalsyse Reddit
+- Links oder Text posten
+- Links bewerte (+-)
+- Links kommentieren
+- Links ausblenden
+- Links versenden (weitersagen)
+- Links speichern
+- Suchfunktion
+- Theming pro Subreddit
+- Subreddit erstellen
+- Subreddits abonnieren
+- Kommentare bewerten (+-)
+- Account Aktivität (kürzlich angesehen)
+- Smart-Kategorien von Links
+  - Beliebtheit, Top-Rating, Neu, ...
+- Kategorien (Subreddits)
+  - Jeder Links gehört in genau eine Kategorie
+- Multi-Reddits gruppieren Sub-Reddits
+- Benutzer anlegen
+- Mehrsprachigkeit
+- Trophäen
+- Reddit-Gold für gute Posts
+- Karma (Erhöht sich bei gut bewerteten Kommentaren und Links)
+- Freunde verlinken
