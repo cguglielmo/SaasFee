@@ -1,20 +1,129 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0px;
 }
 
 a {
   color: #00B7FF;
 }
 
+h1 {
+  margin-top: 0px;
+  font-size: 18px;
+}
+
+.hr {
+ margin: 15px 50px 15px 50px;
+ background-color: lightgrey;
+ height: 1px;
+ width: calc(100% - 100px);
+ float: left;
+}
+
 #header {
- background-color: grey;
+  width: calc(100% - 20px);
+  border-bottom: 1px solid lightgray;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-#subredditChooser {
-
+.navButton {
+  padding: 5px;
+  margin-bottom:14px;
+  margin-top:14px;
+  display: inline-block;
 }
 
-#smartCategoryChooser {
+.origin {
+ font-size: 12px;
+}
 
+#admin {
+ float: right;
+ margin-top:7px;
+}
+#admin > img {
+    height: 40px;
+}
+
+#content {
+    display:inline-block;
+    position: relative;
+    float: left;
+    width: calc(100% - 20px);
+    padding: 10px;
+}
+
+#newReddit {
+    float: right;
+    line-height: 20px;
+}
+
+
+#newReddit::before {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+    line-height: normal;
+    content: url("images/add.png");
+}
+
+#reddits {
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.reddit {
+    position: relative;
+    padding-left: 75px;
+    padding-right: 135px;
+    float: left;
+    overflow: hidden;
+    width: calc(100% - 135px - 75px);
+}
+
+.details {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 130px;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.rating {
+    position: absolute;
+    left: 0px;
+}
+
+.actionBar  {
+    line-height: 50px;
+}
+
+.actionBar > span {
+    margin-right: 5px;
+}
+
+.actionBar > span:before {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.newComment::before {
+    content: url("images/comment_new.png");
+}
+
+.share::before {
+    content: url("images/share.png");
+}
+
+
+.more::before {
+    content: url("images/more.png");
 }
