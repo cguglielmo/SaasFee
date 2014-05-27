@@ -13,7 +13,7 @@ function newReddit() {
 
     var reddits = document.getElementById('reddits');
 
-    var hr = document.createElement('hr');
+    var hr = document.createElement('div');
     hr.setAttribute('class', 'hr');
     reddits.appendChild(hr);
 
