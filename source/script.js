@@ -1,4 +1,11 @@
+//var color = (Math.random()*1000000).toString().substring(0,6);
+//document.getElementsByTagName('body')[0].style.backgroundColor = '#'+color;
+//rgb(82, 130, 104)
+
 function newReddit() {
+    var newRedditContent = document.getElementById('newRedditContent');
+    newRedditContent.style.display = 'inline-block';
+
     /*jshint multistr: true */
     var redditHtml = '\
       <div class="rating">50</div>\
