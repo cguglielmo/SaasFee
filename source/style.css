@@ -7,6 +7,7 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
 
 h1 {
@@ -79,9 +80,9 @@ h1 {
     padding-left: 75px;
 }
 
-#title,
-#link,
-#text {
+#titleField,
+#linkField,
+#textField {
     width: 400px;
 }
 
@@ -91,7 +92,8 @@ h1 {
     width: 100%;
 }
 
-.reddit {
+.redditContent,
+.comments {
     position: relative;
     padding-left: 75px;
     padding-right: 135px;
@@ -110,6 +112,7 @@ h1 {
     width: 130px;
     white-space: nowrap;
     font-size: 12px;
+    color: grey;
 }
 
 
@@ -127,6 +130,7 @@ h1 {
     left: 0px;
     text-align:center;
     line-height: 30px;
+    color: grey;
 }
 
 .rating::after {
@@ -135,10 +139,6 @@ h1 {
     clear: both;
     text-align:center;
     line-height: normal;
-}
-
-.actionBar  {
-    line-height: 50px;
 }
 
 .actionBar > span {
@@ -162,4 +162,45 @@ h1 {
 
 .more::before {
     content: url("images/more.png");
+}
+
+.comments {
+    padding-top: 20px;
+}
+
+.commentField {
+    width: 400px;
+}
+
+.commentSubmit {
+    margin-bottom: 20px;
+}
+
+.commentDetails {
+    font-size: 12px;
+    color: grey;
+}
+
+
+.commentActionBar  {
+    line-height: 30px;
+    font-size: 12px;
+    color: grey;
+}
+
+.commentRating > span {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.ratingUp {
+    content:url("images/rating_up.png");
+    width: 16px;
+    height: 16px;
+}
+
+.ratingDown {
+    content:url("images/rating_down.png");
+    width: 16px;
+    height: 16px;
 }

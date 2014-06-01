@@ -9,6 +9,7 @@ function newReddit() {
 
 /*jshint multistr: true */
 var redditTemplate = '\
+      <div class="redditContent">\
       <div class="rating">50</div>\
       <h1>$title$</h1>\
       $content$\
@@ -17,12 +18,12 @@ var redditTemplate = '\
         <span class="share">Teilen</span>\
         <span class="more">Mehr</span>\
       </div>\
-      <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>';
-
+      <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>\
+      </div>';
 function createNewReddit() {
-    var titleField = document.getElementById('title');
-    var linkField = document.getElementById('link');
-    var textField = document.getElementById('text');
+    var titleField = document.getElementById('titleField');
+    var linkField = document.getElementById('linkField');
+    var textField = document.getElementById('textField');
 
     var title = titleField.value;
     var content;
@@ -43,10 +44,26 @@ function createNewReddit() {
 
     var hr = document.createElement('div');
     hr.setAttribute('class', 'hr');
-    reddits.appendChild(hr);
+    reddits.insertBefore(hr, reddits.firstChild);
 
     var redditElement = document.createElement('div');
     redditElement.setAttribute('class', 'reddit');
     redditElement.innerHTML = reddit;
     reddits.insertBefore(redditElement, reddits.firstChild);
+}
+
+var commentTemplate = '\
+      <div class="rating">50</div>\
+      <h1>$title$</h1>\
+      $content$\
+      <div class="actionBar">\
+        <span class="newComment">Kommentieren</span>\
+        <span class="share">Teilen</span>\
+        <span class="more">Mehr</span>\
+      </div>\
+      <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>';
+
+
+function createNewComment() {
+
 }
