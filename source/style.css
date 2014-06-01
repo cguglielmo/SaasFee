@@ -37,10 +37,6 @@ h1 {
   display: inline-block;
 }
 
-.origin {
- font-size: 12px;
-}
-
 #admin {
  float: right;
  margin-top:7px;
@@ -80,6 +76,13 @@ h1 {
     width: 100%;
     padding-top: 15px;
     padding-bottom: 30px;
+    padding-left: 75px;
+}
+
+#title,
+#link,
+#text {
+    width: 400px;
 }
 
 #reddits {

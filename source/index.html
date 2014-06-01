@@ -15,12 +15,16 @@
 
 <div id="content">
     <div id="newReddit" onclick="newReddit()">Neuer Reddit erfassen</div>
-    <div id="newRedditContent" style="display:none"><input type="text" placeholder="Link"></div>
+    <div id="newRedditContent" style="display:none">
+        <input type="text" id="title" placeholder="Title"><br>
+        <input type="text" id="link" placeholder="Link"><br>
+        <textarea id="text" placeholder="Text"></textarea><br>
+        <button id="submit" onclick="createNewReddit()">Erfassen</button>
+    </div>
     <div id="reddits">
         <div class="reddit">
             <div class="rating">1234</div>
             <h1>Link zu Video</h1>
-            <p class="origin">youtube.com</p>
             <video></video>
             <div class="actionBar">
                 <span class="newComment">Kommentieren</span>

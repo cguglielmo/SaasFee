@@ -33,7 +33,7 @@
     <option maxerr="50" />
     <option mootools="false" />
     <option moz="false" />
-    <option multistr="false" />
+    <option multistr="true" />
     <option newcap="false" />
     <option noarg="true" />
     <option node="false" />

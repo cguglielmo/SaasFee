@@ -5,18 +5,39 @@
 function newReddit() {
     var newRedditContent = document.getElementById('newRedditContent');
     newRedditContent.style.display = 'inline-block';
+}
 
-    /*jshint multistr: true */
-    var redditHtml = '\
+/*jshint multistr: true */
+var redditTemplate = '\
       <div class="rating">50</div>\
-        <h1>Text-Only-Beitrag</h1>\
-      <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>\
+      <h1>$title$</h1>\
+      $content$\
       <div class="actionBar">\
         <span class="newComment">Kommentieren</span>\
         <span class="share">Teilen</span>\
-      <span class="more">Mehr</span>\
+        <span class="more">Mehr</span>\
       </div>\
       <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>';
+
+function createNewReddit() {
+    var titleField = document.getElementById('title');
+    var linkField = document.getElementById('link');
+    var textField = document.getElementById('text');
+
+    var title = titleField.value;
+    var content;
+    if (linkField.value) {
+        var link = linkField.value;
+        if (link.indexOf('http://') !== 0 || link.indexOf('https://') !== 0) {
+            link = 'http://' + link;
+        }
+        title = '<a href="' + link + '">' + title + '</a>';
+        content = '<video></video>';
+    }
+    content += '<p class="text">' + textField.value.replace(new RegExp('\n', 'g'), '<br>') + '</p>';
+
+    var reddit = redditTemplate.replace('$title$', title);
+    reddit = reddit.replace('$content$', content);
 
     var reddits = document.getElementById('reddits');
 
@@ -24,8 +45,8 @@ function newReddit() {
     hr.setAttribute('class', 'hr');
     reddits.appendChild(hr);
 
-    var reddit = document.createElement('div');
-    reddit.setAttribute('class', 'reddit');
-    reddit.innerHTML = redditHtml;
-    reddits.appendChild(reddit);
+    var redditElement = document.createElement('div');
+    redditElement.setAttribute('class', 'reddit');
+    redditElement.innerHTML = reddit;
+    reddits.insertBefore(redditElement, reddits.firstChild);
 }
