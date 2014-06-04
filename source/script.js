@@ -52,8 +52,25 @@ function createNewReddit() {
     reddits.insertBefore(redditElement, reddits.firstChild);
 }
 
+function showComments() {
+    var comments = document.getElementsByClassName('comments')[0];
+    comments.style.display = 'inline-block';
+
+    var newCommentSpan = document.getElementsByClassName('newComment')[1];
+    newCommentSpan.innerHTML = 'Ausblenden (2)';
+    newCommentSpan.onclick = hideComments;
+}
+
+function hideComments() {
+    var comments = document.getElementsByClassName('comments')[0];
+    comments.style.display = 'none';
+
+    var newCommentSpan = document.getElementsByClassName('newComment')[1];
+    newCommentSpan.innerHTML = 'Kommentare (2)';
+    newCommentSpan.onclick = showComments;
+}
+
 var commentTemplate = '\
-    <div class="comment">\
         <div class="commentDetails"><a href="$profileLink$">$profileName$</a> $commentDate$</div>\
         <p>$comment$</p>\
         <div class="commentActionBar">\
@@ -62,8 +79,7 @@ var commentTemplate = '\
                 <span>1234</span>\
                 <span class="ratingUp"></span>\
             </div>\
-        </div>\
-    </div>';
+        </div>';
 function createNewComment() {
     var commentField = document.getElementsByClassName('commentField')[0];
     var profileName = 'claudio';
@@ -75,13 +91,14 @@ function createNewComment() {
     comment = comment.replace('$commentDate$', '2014/06/04');
 
     var comments = document.getElementsByClassName('comments')[0];
+    var lastComment = comments.getElementsByClassName('comment')[0];
 
     var hr = document.createElement('div');
     hr.setAttribute('class', 'hr');
-    comments.insertBefore(hr, comments.firstChild);
+    comments.insertBefore(hr, lastComment);
 
     var commentElement = document.createElement('div');
-    commentElement.setAttribute('class', 'reddit');
+    commentElement.setAttribute('class', 'comment');
     commentElement.innerHTML = comment;
-    comments.insertBefore(commentElement, comments.firstChild);
+    comments.insertBefore(commentElement, hr);
 }

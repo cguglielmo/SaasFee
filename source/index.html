@@ -50,15 +50,17 @@
                     sit amet.</p>
 
                 <div class="actionBar">
-                    <span class="newComment">Kommentieren</span>
+                    <span class="newComment" onclick="showComments()">Kommentare (2)</span>
                     <span class="share">Teilen</span>
                     <span class="more">Mehr</span>
                 </div>
                 <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>
             </div>
-            <div class="comments">
-                <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
-                <button class="commentSubmit" onclick="createNewComment()">Erfassen</button>
+            <div class="comments" style="display:none">
+                <div class="newCommentContent">
+                    <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
+                    <button class="commentSubmit" onclick="createNewComment()">Erfassen</button>
+                </div>
                 <div class="comment">
                     <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
                     <p>

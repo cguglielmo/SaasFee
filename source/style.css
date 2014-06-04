@@ -152,6 +152,15 @@ h1 {
     line-height: normal;
 }
 
+
+.newComment {
+    cursor: pointer;
+}
+
+.newComment:hover {
+    text-decoration: underline;
+}
+
 .newComment::before {
     content: url("images/comment_new.png");
 }
