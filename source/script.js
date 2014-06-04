@@ -53,17 +53,35 @@ function createNewReddit() {
 }
 
 var commentTemplate = '\
-      <div class="rating">50</div>\
-      <h1>$title$</h1>\
-      $content$\
-      <div class="actionBar">\
-        <span class="newComment">Kommentieren</span>\
-        <span class="share">Teilen</span>\
-        <span class="more">Mehr</span>\
-      </div>\
-      <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>';
-
-
+    <div class="comment">\
+        <div class="commentDetails"><a href="$profileLink$">$profileName$</a> $commentDate$</div>\
+        <p>$comment$</p>\
+        <div class="commentActionBar">\
+            <div class="commentRating">\
+                <span class="ratingDown"></span>\
+                <span>1234</span>\
+                <span class="ratingUp"></span>\
+            </div>\
+        </div>\
+    </div>';
 function createNewComment() {
+    var commentField = document.getElementsByClassName('commentField')[0];
+    var profileName = 'claudio';
+    var profileLink = 'profile/' + profileName;
 
+    var comment = commentTemplate.replace('$comment$', commentField.value);
+    comment = comment.replace('$profileLink$', profileLink);
+    comment = comment.replace('$profileName$', profileName);
+    comment = comment.replace('$commentDate$', '2014/06/04');
+
+    var comments = document.getElementsByClassName('comments')[0];
+
+    var hr = document.createElement('div');
+    hr.setAttribute('class', 'hr');
+    comments.insertBefore(hr, comments.firstChild);
+
+    var commentElement = document.createElement('div');
+    commentElement.setAttribute('class', 'reddit');
+    commentElement.innerHTML = comment;
+    comments.insertBefore(commentElement, comments.firstChild);
 }
