@@ -59,6 +59,7 @@ function showComments() {
     var newCommentSpan = document.getElementsByClassName('newComment')[1];
     newCommentSpan.innerHTML = 'Ausblenden (2)';
     newCommentSpan.onclick = hideComments;
+    newCommentSpan.scrollIntoView(true);
 }
 
 function hideComments() {
