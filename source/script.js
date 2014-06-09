@@ -2,10 +2,32 @@
 //document.getElementsByTagName('body')[0].style.backgroundColor = '#'+color;
 //rgb(82, 130, 104)
 
-function newReddit() {
-    var newRedditContent = document.getElementById('newRedditContent');
-    newRedditContent.style.display = 'inline-block';
+initNewRedditButton();
+
+function showNewRedditBox() {
+    var newRedditContent = document.getElementById('newRedditBox');
+    newRedditBox.style.display = 'inline-block';
+
+    var newRedditButton = document.getElementById('newRedditButton');
+    newRedditButton.innerHTML = 'Abbrechen';
+    newRedditButton.className = newRedditButton.className.replace(' newRedditBoxHidden', '');
+    newRedditButton.onclick = hideNewRedditBox;
 }
+
+function hideNewRedditBox() {
+    var newRedditBox = document.getElementById('newRedditBox');
+    newRedditBox.style.display = 'none';
+
+    initNewRedditButton();
+}
+
+function initNewRedditButton() {
+    var newRedditButton = document.getElementById('newRedditButton');
+    newRedditButton.innerHTML = 'Neuer Reddit erfassen';
+    newRedditButton.className +=' newRedditBoxHidden';
+    newRedditButton.onclick = showNewRedditBox;
+}
+
 
 /*jshint multistr: true */
 var redditTemplate = '\
@@ -116,6 +138,8 @@ function createContent(url) {
         iframe.setAttribute('class', 'youtube');
         return iframe.outerHTML;
     }
+
+    return '';
 }
 
 function computeLinkType(link) {

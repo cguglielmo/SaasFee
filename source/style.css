@@ -55,17 +55,17 @@ h1 {
     background-color: white;
 }
 
-#newReddit {
+#newRedditButton {
     float: right;
     line-height: 20px;
     cursor: pointer;
 }
 
-#newReddit:hover {
+#newRedditButton:hover {
     text-decoration: underline;
 }
 
-#newReddit::before {
+#newRedditButton.newRedditBoxHidden::before {
     display: inline-block;
     margin-right: 5px;
     vertical-align: middle;
@@ -73,7 +73,7 @@ h1 {
     content: url("images/add.png");
 }
 
-#newRedditContent {
+#newRedditBox {
     width: 100%;
     padding-top: 15px;
     padding-bottom: 30px;
