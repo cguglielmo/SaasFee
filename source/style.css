@@ -117,28 +117,38 @@ h1 {
 
 
 
-.rating::before {
-    content: url("images/rating_up.png");
-    display: block;
-    clear: both;
-    text-align:center;
-    line-height: normal;
-}
+
 
 .rating {
     position: absolute;
     left: 0px;
     text-align:center;
-    line-height: 30px;
     color: grey;
 }
 
-.rating::after {
-    content: url("images/rating_down.png");
-    display: block;
-    clear: both;
-    text-align:center;
-    line-height: normal;
+.ratingValue {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ratingUp, .ratingDown {
+    padding: 0px;
+
+    margin: 0 auto;
+    background-color: transparent;;
+    border: none;
+}
+
+.ratingUp::before {
+    content:url("images/rating_up.png");
+    width: 18px;
+    height: 18px;
+}
+
+.ratingDown::before {
+    content:url("images/rating_down.png");
+    width: 18px;
+    height: 18px;
 }
 
 .actionBar > span {
@@ -202,13 +212,13 @@ h1 {
     vertical-align: middle;
 }
 
-.ratingUp {
+.commentRatingUp {
     content:url("images/rating_up.png");
     width: 16px;
     height: 16px;
 }
 
-.ratingDown {
+.commentRatingDown {
     content:url("images/rating_down.png");
     width: 16px;
     height: 16px;

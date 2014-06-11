@@ -32,7 +32,11 @@ function initNewRedditButton() {
 /*jshint multistr: true */
 var redditTemplate = '\
       <div class="redditContent">\
-      <div class="rating">50</div>\
+      <div class="rating">\
+        <button class="ratingUp" onclick="rateUp()"></button>\
+        <div class="ratingValue">$rating$</div>\
+        <button class="ratingDown" onclick="rateDown()"></button>\
+      </div>\
       <h1>$title$</h1>\
       $content$\
       <div class="actionBar">\
@@ -47,20 +51,30 @@ function createNewReddit() {
     var linkField = document.getElementById('linkField');
     var textField = document.getElementById('textField');
 
-    var title = titleField.value;
-    var content;
-    if (linkField.value) {
-        var link = linkField.value;
+    var reddit = {
+        title: titleField.value,
+        link: linkField.value,
+        text: textField.value,
+        rating: 0
+    };
+
+    if (!reddit.title) {
+       reddit.title = reddit.link;
+    }
+
+    showReddit(reddit);
+}
+
+function showReddit(reddit) {
+    var content = '', title='';
+    if (reddit.link) {
+        var link = reddit.link;
         var url = parseLink(link);
 
-        title = '<a href="' + url.fullUrl + '">' + title + '</a>';
-
+        title = '<a href="' + url.fullUrl + '">' + reddit.title + '</a>';
         content = createContent(url);
     }
-    content += '<p class="text">' + textField.value.replace(new RegExp('\n', 'g'), '<br>') + '</p>';
-
-    var reddit = redditTemplate.replace('$title$', title);
-    reddit = reddit.replace('$content$', content);
+    content += '<p class="text">' + reddit.text.replace(new RegExp('\n', 'g'), '<br>') + '</p>';
 
     var reddits = document.getElementById('reddits');
 
@@ -68,9 +82,13 @@ function createNewReddit() {
     hr.setAttribute('class', 'hr');
     reddits.insertBefore(hr, reddits.firstChild);
 
+    var redditHtml = redditTemplate.replace('$title$', title);
+    redditHtml = redditHtml.replace('$content$', content);
+    redditHtml = redditHtml.replace('$rating$', reddit.rating);
+
     var redditElement = document.createElement('div');
     redditElement.setAttribute('class', 'reddit');
-    redditElement.innerHTML = reddit;
+    redditElement.innerHTML = redditHtml;
     reddits.insertBefore(redditElement, reddits.firstChild);
 }
 
@@ -165,6 +183,21 @@ function checkExtension(extension, types) {
         }
     }
     return false;
+}
+
+function rateUp() {
+   var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
+   var rating = ratingDiv.textContent;
+   rating++;
+   ratingDiv.textContent = rating;
+}
+
+
+function rateDown() {
+    var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
+    var rating = ratingDiv.textContent;
+    rating--;
+    ratingDiv.textContent = rating;
 }
 
 function showComments() {

@@ -24,7 +24,11 @@
     <div id="reddits">
         <div class="reddit">
             <div class="redditContent">
-                <div class="rating">1234</div>
+                <div class="rating">
+                    <button class="ratingUp" onclick="rateUp()"></button>
+                    <div class="ratingValue">1234</div>
+                    <button class="ratingDown" onclick="rateDown()"></button>
+                </div>
                 <h1>Link zu Video</h1>
                 <video></video>
                 <div class="actionBar">
@@ -38,7 +42,11 @@
         <div class="hr"></div>
         <div class="reddit">
             <div class="redditContent">
-                <div class="rating">50</div>
+                <div class="rating">
+                    <button class="ratingUp" onclick="rateUp()"></button>
+                    <div class="ratingValue">1234</div>
+                    <button class="ratingDown" onclick="rateDown()"></button>
+                </div>
                 <h1>Text-Only-Beitrag</h1>
 
                 <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
@@ -78,8 +86,8 @@
                         Das ist so ein schöner Link.
                     </p>
                     <div class="commentActionBar">
-                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
-                                class="ratingUp"></span></div>
+                        <div class="commentRating"><span class="commentRatingDown"></span><span>1234</span><span
+                                class="commentRatingUp"></span></div>
                     </div>
                 </div>
             </div>
