@@ -4,6 +4,7 @@
 
 initNewRedditButton();
 $('.newComment').on('click', toogleComments);
+$('.commentSubmit').on('click', createNewComment);
 
 function showNewRedditBox() {
     var newRedditContent = document.getElementById('newRedditBox');
