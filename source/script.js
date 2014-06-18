@@ -3,6 +3,7 @@
 //rgb(82, 130, 104)
 
 initNewRedditButton();
+$('.newComment').on('click', toogleComments);
 
 function showNewRedditBox() {
     var newRedditContent = document.getElementById('newRedditBox');
@@ -200,23 +201,28 @@ function rateDown() {
     ratingDiv.textContent = rating;
 }
 
-function showComments() {
-    var comments = document.getElementsByClassName('comments')[0];
-    comments.style.display = 'inline-block';
+function toogleComments(e) {
+    var newCommentSpan = $(e.target);
+    var reddit = newCommentSpan.closest('.reddit');
+    var comments = reddit.find('.comments');
 
-    var newCommentSpan = document.getElementsByClassName('newComment')[1];
-    newCommentSpan.innerHTML = 'Ausblenden (2)';
-    newCommentSpan.onclick = hideComments;
-    newCommentSpan.scrollIntoView(true);
+    if (comments.css('display') === 'none') {
+        showComments(newCommentSpan, comments);
+    } else {
+        hideComments(newCommentSpan, comments);
+    }
 }
 
-function hideComments() {
-    var comments = document.getElementsByClassName('comments')[0];
-    comments.style.display = 'none';
+function showComments($newCommentElement, $commentsElement) {
+    $commentsElement.css('display', 'inline-block');
 
-    var newCommentSpan = document.getElementsByClassName('newComment')[1];
-    newCommentSpan.innerHTML = 'Kommentare (2)';
-    newCommentSpan.onclick = showComments;
+    $newCommentElement.html('Ausblenden (2)');
+}
+
+function hideComments($newCommentElement, $commentsElement) {
+    $commentsElement.css('display', 'none');
+
+    $newCommentElement.html('Kommentare (2)');
 }
 
 var commentTemplate = '\
@@ -229,25 +235,26 @@ var commentTemplate = '\
                 <span class="ratingUp"></span>\
             </div>\
         </div>';
-function createNewComment() {
-    var commentField = document.getElementsByClassName('commentField')[0];
+function createNewComment(e) {
+    var $comments = $(e.target).closest('.comments');
+    var $commentField = $comments.find('.commentField');
+
     var profileName = 'claudio';
     var profileLink = 'profile/' + profileName;
 
-    var comment = commentTemplate.replace('$comment$', commentField.value);
+    var comment = commentTemplate.replace('$comment$', $commentField.val());
     comment = comment.replace('$profileLink$', profileLink);
     comment = comment.replace('$profileName$', profileName);
-    comment = comment.replace('$commentDate$', '2014/06/04');
+    comment = comment.replace('$commentDate$', '21/06/2014');
 
-    var comments = document.getElementsByClassName('comments')[0];
-    var lastComment = comments.getElementsByClassName('comment')[0];
+    var $lastComment = $comments.children('.comment:first');
+
+    var $commentElement = $('<div></div>').
+        addClass('comment').
+        html(comment);
+    $lastComment.before($commentElement);
 
     var hr = document.createElement('div');
     hr.setAttribute('class', 'hr');
-    comments.insertBefore(hr, lastComment);
-
-    var commentElement = document.createElement('div');
-    commentElement.setAttribute('class', 'comment');
-    commentElement.innerHTML = comment;
-    comments.insertBefore(commentElement, hr);
+    $commentElement.after(hr);
 }

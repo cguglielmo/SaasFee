@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Node.js v0.10.28 Core Modules" level="application" />
     <orderEntry type="library" name="SaasFee node_modules" level="project" />
+    <orderEntry type="library" name="jquery-2.1.1" level="application" />
   </component>
 </module>
 

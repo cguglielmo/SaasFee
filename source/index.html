@@ -32,11 +32,38 @@
                 <h1>Link zu Video</h1>
                 <video></video>
                 <div class="actionBar">
-                    <span class="newComment">Kommentieren</span>
+                    <span class="newComment">Kommentare (2)</span>
                     <span class="share">Teilen</span>
                     <span class="more">Mehr</span>
                 </div>
                 <div class="details">Submitted<br>3 hours ago<br>by bruno<br>to /r/subreddit</div>
+            </div>
+            <div class="comments" style="display:none">
+                <div class="newCommentContent">
+                    <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
+                    <button class="commentSubmit" onclick="createNewComment()">Erfassen</button>
+                </div>
+                <div class="comment">
+                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
+                    <p>
+                        Das ist so ein schöner Link.
+                    </p>
+                    <div class="commentActionBar">
+                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
+                                class="ratingUp"></span></div>
+                    </div>
+                </div>
+                <div class="hr"></div>
+                <div class="comment">
+                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
+                    <p>
+                        Das ist so ein schöner Link.
+                    </p>
+                    <div class="commentActionBar">
+                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
+                                class="ratingUp"></span></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="hr"></div>
@@ -58,7 +85,7 @@
                     sit amet.</p>
 
                 <div class="actionBar">
-                    <span class="newComment" onclick="showComments()">Kommentare (2)</span>
+                    <span class="newComment">Kommentare (2)</span>
                     <span class="share">Teilen</span>
                     <span class="more">Mehr</span>
                 </div>
@@ -95,6 +122,7 @@
     </div>
 </div>
 
+<script src="lib/jquery-2.1.1.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
