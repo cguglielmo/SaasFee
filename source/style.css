@@ -12,6 +12,7 @@ a {
 
 h1 {
   margin-top: 0px;
+  margin-bottom: 5px;
   font-size: 18px;
 }
 
@@ -76,7 +77,7 @@ h1 {
 #newRedditBox {
     width: 100%;
     padding-top: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     padding-left: 75px;
 }
 
@@ -90,26 +91,32 @@ h1 {
     position: relative;
     float: left;
     width: 100%;
+    margin-top: 15px;
 }
 
 .redditContent,
 .comments {
     position: relative;
     padding-left: 75px;
-    padding-right: 135px;
     float: left;
     overflow: hidden;
-    width: calc(100% - 135px - 75px);
+    width: calc(100% - 75px);
+}
+
+.redditContent button,
+.comment button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.redditContent button:hover,
+.comment button:hover {
+    text-decoration: underline;
 }
 
 .details {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 130px;
     white-space: nowrap;
     font-size: 12px;
     color: grey;
@@ -135,8 +142,6 @@ h1 {
     padding: 0px;
 
     margin: 0 auto;
-    background-color: transparent;;
-    border: none;
 }
 
 .ratingUp::before {
@@ -151,6 +156,10 @@ h1 {
     height: 18px;
 }
 
+.actionBar {
+    white-space: nowrap;
+}
+
 .actionBar > span {
     margin-right: 5px;
 }
@@ -161,14 +170,14 @@ h1 {
     vertical-align: middle;
     line-height: normal;
 }
-
-
-.newComment {
-    cursor: pointer;
+.actionBar > button {
+    margin-right: 5px;
 }
 
-.newComment:hover {
-    text-decoration: underline;
+.actionBar > button:before {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 .newComment::before {
@@ -222,4 +231,42 @@ h1 {
     content:url("images/rating_down.png");
     width: 16px;
     height: 16px;
+}
+
+
+@media (max-width: 500px) {
+    #newRedditBox,
+    .redditContent,
+    .comments {
+        padding-left: 0px;
+        width: 100%;
+    }
+
+    .redditContent button > span,
+    .comment button > span {
+        display: none;
+    }
+
+    .rating {
+        bottom: 0px;
+    }
+
+    .rating span,
+    .rating button {
+        vertical-align: middle;
+    }
+
+    .ratingValue {
+        display: inline-block;
+        padding: 0px 5px;
+    }
+
+    .actionBar {
+        margin-left: 130px;
+    }
+
+    .hr {
+        margin: 15px 25px 15px 25px;
+        width: calc(100% - 50px);
+    }
 }
