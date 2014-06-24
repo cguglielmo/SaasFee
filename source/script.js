@@ -34,20 +34,53 @@ function initNewRedditButton() {
 /*jshint multistr: true */
 var redditTemplate = '\
       <div class="redditContent">\
-      <div class="rating">\
-        <button class="ratingUp" onclick="rateUp()"></button>\
-        <div class="ratingValue">$rating$</div>\
-        <button class="ratingDown" onclick="rateDown()"></button>\
+        <div class="rating">\
+          <button class="ratingUp" onclick="rateUp()"></button>\
+          <div class="ratingValue">$rating$</div>\
+          <button class="ratingDown" onclick="rateDown()"></button>\
+        </div>\
+        <h1>$title$</h1>\
+        <div class="details">24.06.2014 by bruno</div>\
+        <p>$content$</p>\
+        <div class="actionBar">\
+          <button class="newComment"><span>Kommentare (0)</span></button>\
+          <button class="share"><span>Teilen</span></button>\
+          <button class="more"><span>Mehr</span></button>\
+        </div>\
       </div>\
-      <h1>$title$</h1>\
-      $content$\
-      <div class="actionBar">\
-        <span class="newComment">Kommentieren</span>\
-        <span class="share">Teilen</span>\
-        <span class="more">Mehr</span>\
-      </div>\
-      <div class="details">Submitted<br>3 hours ago<br>by bruno asdf asf asdfsdfasdf<br>to /r/subreddit</div>\
+      <div class="comments" style="display:none">\
+        <div class="newCommentContent">\
+          <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>\
+          <button class="commentSubmit">Erfassen</button>\
+        </div>\
       </div>';
+initSampleEntries();
+function initSampleEntries() {
+    // sample text entry
+    var reddit = {
+        title: 'Text-Only-Beitrag',
+        link: '',
+        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+    sit amet.',
+        rating: 1234
+    };
+    showReddit(reddit);
+
+    // sample video entry
+    reddit = {
+        title: 'Link zu Video',
+        link: '//www.youtube.com/embed/C-y70ZOSzE0',
+        text: '',
+        rating: 1234
+    };
+    showReddit(reddit);
+}
+
 function createNewReddit() {
     var titleField = document.getElementById('titleField');
     var linkField = document.getElementById('linkField');
@@ -76,22 +109,28 @@ function showReddit(reddit) {
         title = '<a href="' + url.fullUrl + '">' + reddit.title + '</a>';
         content = createContent(url);
     }
-    content += '<p class="text">' + reddit.text.replace(new RegExp('\n', 'g'), '<br>') + '</p>';
+    else {
+        title = reddit.title;
+        content = reddit.text.replace(new RegExp('\n', 'g'), '<br>');
+    }
 
-    var reddits = document.getElementById('reddits');
+    var $reddits = $('#reddits');
 
     var hr = document.createElement('div');
     hr.setAttribute('class', 'hr');
-    reddits.insertBefore(hr, reddits.firstChild);
+    $reddits.prepend(hr);
 
     var redditHtml = redditTemplate.replace('$title$', title);
     redditHtml = redditHtml.replace('$content$', content);
     redditHtml = redditHtml.replace('$rating$', reddit.rating);
 
-    var redditElement = document.createElement('div');
-    redditElement.setAttribute('class', 'reddit');
-    redditElement.innerHTML = redditHtml;
-    reddits.insertBefore(redditElement, reddits.firstChild);
+    var $redditElement = $('<div></div>').
+        addClass('reddit').
+        html(redditHtml);
+    $reddits.prepend($redditElement);
+
+    $redditElement.find('.newComment').on('click', toogleComments);
+    $redditElement.find('.commentSubmit').on('click', createNewComment);
 }
 
 function parseLink(link) {
@@ -203,7 +242,7 @@ function rateDown() {
 }
 
 function toogleComments(e) {
-    var newCommentSpan = $(e.target);
+    var newCommentSpan = $(e.currentTarget).find('span');
     var reddit = newCommentSpan.closest('.reddit');
     var comments = reddit.find('.comments');
 
@@ -240,22 +279,34 @@ function createNewComment(e) {
     var $comments = $(e.target).closest('.comments');
     var $commentField = $comments.find('.commentField');
 
-    var profileName = 'claudio';
+    var comment = {
+        profileName: 'claudio',
+        text: $commentField.val(),
+        date: '21/06/2014',
+        rating: 0
+    };
+
+    showComment($comments, comment);
+}
+
+function showComment($commentContainer, comment) {
+    var profileName = comment.profileName;
     var profileLink = 'profile/' + profileName;
 
-    var comment = commentTemplate.replace('$comment$', $commentField.val());
+    var comment = commentTemplate.replace('$comment$', comment.text);
     comment = comment.replace('$profileLink$', profileLink);
     comment = comment.replace('$profileName$', profileName);
-    comment = comment.replace('$commentDate$', '21/06/2014');
+    comment = comment.replace('$commentDate$', comment.date);
+    comment = comment.replace('$rating$', comment.rating);
 
-    var $lastComment = $comments.children('.comment:first');
+    var $newCommentContent = $commentContainer.children('.newCommentContent');
+
+    var $hr = $('<div></div>').
+        addClass('hr');
+    $newCommentContent.after($hr);
 
     var $commentElement = $('<div></div>').
         addClass('comment').
         html(comment);
-    $lastComment.before($commentElement);
-
-    var hr = document.createElement('div');
-    hr.setAttribute('class', 'hr');
-    $commentElement.after(hr);
+    $newCommentContent.after($commentElement);
 }
