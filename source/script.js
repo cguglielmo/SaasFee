@@ -271,7 +271,7 @@ var commentTemplate = '\
         <div class="commentActionBar">\
             <div class="commentRating">\
                 <span class="ratingDown"></span>\
-                <span>1234</span>\
+                <span>$rating$</span>\
                 <span class="ratingUp"></span>\
             </div>\
         </div>';
@@ -293,11 +293,11 @@ function showComment($commentContainer, comment) {
     var profileName = comment.profileName;
     var profileLink = 'profile/' + profileName;
 
-    var comment = commentTemplate.replace('$comment$', comment.text);
-    comment = comment.replace('$profileLink$', profileLink);
-    comment = comment.replace('$profileName$', profileName);
-    comment = comment.replace('$commentDate$', comment.date);
-    comment = comment.replace('$rating$', comment.rating);
+    var commentHtml = commentTemplate.replace('$comment$', comment.text);
+    commentHtml = commentHtml.replace('$profileLink$', profileLink);
+    commentHtml = commentHtml.replace('$profileName$', profileName);
+    commentHtml = commentHtml.replace('$commentDate$', comment.date);
+    commentHtml = commentHtml.replace('$rating$', comment.rating);
 
     var $newCommentContent = $commentContainer.children('.newCommentContent');
 
@@ -307,6 +307,6 @@ function showComment($commentContainer, comment) {
 
     var $commentElement = $('<div></div>').
         addClass('comment').
-        html(comment);
+        html(commentHtml);
     $newCommentContent.after($commentElement);
 }
