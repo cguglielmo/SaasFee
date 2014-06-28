@@ -303,9 +303,11 @@ function showComment($commentContainer, comment) {
 
     var $newCommentContent = $commentContainer.children('.newCommentContent');
 
-    var $hr = $('<div></div>').
-        addClass('hr');
-    $newCommentContent.after($hr);
+    if ($commentContainer.children('.comment').length > 0) {
+        var $hr = $('<div></div>').
+            addClass('hr');
+        $newCommentContent.after($hr);
+    }
 
     var $commentElement = $('<div></div>').
         addClass('comment').
