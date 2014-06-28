@@ -122,10 +122,6 @@ h1 {
     color: grey;
 }
 
-
-
-
-
 .rating {
     position: absolute;
     left: 0px;
@@ -216,23 +212,14 @@ h1 {
     color: grey;
 }
 
-.commentRating > span {
-    margin-right: 5px;
+.commentRating button {
     vertical-align: middle;
 }
 
-.commentRatingUp {
-    content:url("images/rating_up.png");
-    width: 16px;
-    height: 16px;
+.commentRating .ratingValue {
+    display: inline-block;
+    padding: 0px 5px;
 }
-
-.commentRatingDown {
-    content:url("images/rating_down.png");
-    width: 16px;
-    height: 16px;
-}
-
 
 @media (max-width: 500px) {
     #newRedditBox,
@@ -251,7 +238,6 @@ h1 {
         bottom: 0px;
     }
 
-    .rating span,
     .rating button {
         vertical-align: middle;
     }

@@ -35,9 +35,9 @@ function initNewRedditButton() {
 var redditTemplate = '\
       <div class="redditContent">\
         <div class="rating">\
-          <button class="ratingUp" onclick="rateUp()"></button>\
+          <button class="ratingUp"></button>\
           <div class="ratingValue">$rating$</div>\
-          <button class="ratingDown" onclick="rateDown()"></button>\
+          <button class="ratingDown"></button>\
         </div>\
         <h1>$title$</h1>\
         <div class="details">24.06.2014 by bruno</div>\
@@ -131,6 +131,8 @@ function showReddit(reddit) {
 
     $redditElement.find('.newComment').on('click', toogleComments);
     $redditElement.find('.commentSubmit').on('click', createNewComment);
+    $redditElement.find('.ratingUp').on('click', rateUp);
+    $redditElement.find('.ratingDown').on('click', rateDown);
 }
 
 function parseLink(link) {
@@ -270,9 +272,9 @@ var commentTemplate = '\
         <p>$comment$</p>\
         <div class="commentActionBar">\
             <div class="commentRating">\
-                <span class="ratingDown"></span>\
-                <span>$rating$</span>\
-                <span class="ratingUp"></span>\
+                <button class="ratingUp"></button>\
+                <div class="ratingValue">$rating$</div>\
+                <button class="ratingDown"></button>\
             </div>\
         </div>';
 function createNewComment(e) {
@@ -309,4 +311,7 @@ function showComment($commentContainer, comment) {
         addClass('comment').
         html(commentHtml);
     $newCommentContent.after($commentElement);
+
+    $commentElement.find('.ratingUp').on('click', rateUp);
+    $commentElement.find('.ratingDown').on('click', rateDown);
 }
