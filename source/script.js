@@ -41,9 +41,9 @@ jQuery.noConflict();
 
     initNewRedditBox();
 
-    String.prototype.nl2br = function () {
-        return this.replace(/\n/g, "<br>");
-    };
+    function nl2br(s) {
+        return s.replace(/\n/g, "<br>");
+    }
 
     function initNewRedditBox() {
         var $newRedditButton = $('#newRedditButton');
@@ -115,7 +115,7 @@ jQuery.noConflict();
         }
         else {
             title = reddit.title;
-            content = reddit.text.nl2br();
+            content = nl2br(reddit.text);
         }
 
         $reddits = $('#reddits');
@@ -306,7 +306,7 @@ jQuery.noConflict();
 
     function showComment($commentContainer, comment) {
         var $newCommentBox, $commentElement, $hr;
-        var commentHtml = commentTemplate.replace('$comment$', comment.text.nl2br());
+        var commentHtml = commentTemplate.replace('$comment$', nl2br(comment.text));
         commentHtml = commentHtml.replace('$profile$', createProfileLinkTag(comment.author));
         commentHtml = commentHtml.replace('$commentDate$', comment.date.toLocaleString());
         commentHtml = commentHtml.replace('$rating$', comment.rating);
