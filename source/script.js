@@ -43,7 +43,7 @@ jQuery.noConflict();
 
     String.prototype.nl2br = function () {
         return this.replace(/\n/g, "<br>");
-    }
+    };
 
     function initNewRedditBox() {
         var $newRedditButton = $('#newRedditButton');
@@ -66,21 +66,17 @@ jQuery.noConflict();
     }
 
     function showNewRedditBox($newRedditBox) {
-        var $newRedditButton;
-
         $newRedditBox.show();
 
-        $newRedditButton = $('#newRedditButton')
+        $('#newRedditButton')
             .text('Abbrechen')
             .removeClass('newRedditBoxHidden');
     }
 
     function hideNewRedditBox($newRedditBox) {
-        var $newRedditButton
+       $newRedditBox.hide();
 
-        $newRedditBox.hide();
-
-        $newRedditButton = $('#newRedditButton')
+        $('#newRedditButton')
             .text('Neuer Reddit erfassen')
             .addClass('newRedditBoxHidden');
     }
@@ -108,10 +104,11 @@ jQuery.noConflict();
     }
 
     function showReddit(reddit) {
+        var $redditElement, redditHtml, hr, $reddits, link, url;
         var content = '', title = '';
         if (reddit.link) {
-            var link = reddit.link;
-            var url = parseLink(link);
+            link = reddit.link;
+            url = parseLink(link);
 
             title = '<a href="' + url.fullUrl + '">' + reddit.title + '</a>';
             content = createContent(url);
@@ -121,22 +118,22 @@ jQuery.noConflict();
             content = reddit.text.nl2br();
         }
 
-        var $reddits = $('#reddits');
+        $reddits = $('#reddits');
 
-        var hr = document.createElement('div');
+        hr = document.createElement('div');
         hr.setAttribute('class', 'hr');
         $reddits.prepend(hr);
 
-        var redditHtml = redditTemplate.replace('$title$', title);
+        redditHtml = redditTemplate.replace('$title$', title);
         redditHtml = redditHtml.replace('$content$', content);
         redditHtml = redditHtml.replace('$rating$', reddit.rating);
         redditHtml = redditHtml.replace('$profile$', createProfileLinkTag(reddit.author));
         redditHtml = redditHtml.replace('$date$', reddit.date.toLocaleString());
         redditHtml = redditHtml.replace('$commentCount$', reddit.commentCount);
 
-        var $redditElement = $('<article>').
-            addClass('reddit').
-            html(redditHtml);
+        $redditElement = $('<article>')
+            .addClass('reddit')
+            .html(redditHtml);
         $reddits.prepend($redditElement);
 
         $redditElement.find('.newComment').on('click', toggleComments);
@@ -148,7 +145,7 @@ jQuery.noConflict();
     }
 
     function parseLink(link) {
-        var url = {}, index, length;
+        var url = {}, index, indexSlash;
         if (link.indexOf('//') === 0) {
             url.scheme = '//';
             url.path = link.substr(2);
@@ -164,7 +161,7 @@ jQuery.noConflict();
             link = url.scheme + '://' + url.path;
         }
 
-        var indexSlash = url.path.indexOf('/');
+        indexSlash = url.path.indexOf('/');
         if (indexSlash > 0) {
             url.domain = url.path.substr(0, indexSlash);
             url.path = url.path.substr(indexSlash + 1);
@@ -191,22 +188,23 @@ jQuery.noConflict();
     }
 
     function createContent(url) {
+        var image, src, path, iframe;
         var linkType = computeLinkType(url);
         if (linkType === 'image') {
-            var image = document.createElement('img');
+            image = document.createElement('img');
             image.setAttribute('src', url.fullUrl);
             return image.outerHTML;
         } else if (linkType === 'youtube') {
-            var src = url.fullUrl;
+            src = url.fullUrl;
             if (src.indexOf('embed') < 0) {
-                var path = url.path;
+                path = url.path;
                 if (path.indexOf('watch?v=') >= 0) {
                     path = path.replace('watch?v=', '');
                 }
                 src = '//www.youtube.com/embed/' + path;
             }
 
-            var iframe = document.createElement('iframe');
+            iframe = document.createElement('iframe');
             iframe.setAttribute('src', src);
             iframe.setAttribute('class', 'youtube');
             return iframe.outerHTML;
@@ -216,19 +214,15 @@ jQuery.noConflict();
     }
 
     function computeLinkType(link) {
+        var types;
         if (link.domain.indexOf('youtu.be') === 0 || link.domain.indexOf('www.youtube.com') === 0) {
             return 'youtube';
         }
 
-        var types = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tif'];
+        types = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tif'];
         if (checkExtension(link.extension, types)) {
             return 'image';
         }
-
-        //extensions = ['mp4', 'm4v', 'mp4v', 'ogv', 'ogg', 'webm'];
-        //if (checkExtension(link.extension, extensions)) {
-        //    return 'video';
-        //}
     }
 
     function checkExtension(extension, types) {
@@ -280,6 +274,7 @@ jQuery.noConflict();
     }
 
     function createNewComment(e) {
+        var comment;
         var $reddit = $(e.target).parents('.reddit');
         var reddit = $reddit.data('reddit');
         var $comments = $(e.target).closest('.comments');
@@ -289,7 +284,7 @@ jQuery.noConflict();
         reddit.commentCount++;
         $commentCount.text(reddit.commentCount);
 
-        var comment = {
+        comment = {
             author: currentUser,
             text: $commentField.val(),
             date: new Date(),
@@ -309,22 +304,23 @@ jQuery.noConflict();
     }
 
     function showComment($commentContainer, comment) {
+        var $newCommentBox, $commentElement, $hr;
         var commentHtml = commentTemplate.replace('$comment$', comment.text.nl2br());
         commentHtml = commentHtml.replace('$profile$', createProfileLinkTag(comment.author));
         commentHtml = commentHtml.replace('$commentDate$', comment.date.toLocaleString());
         commentHtml = commentHtml.replace('$rating$', comment.rating);
 
-        var $newCommentBox = $commentContainer.children('.newCommentBox');
+        $newCommentBox = $commentContainer.children('.newCommentBox');
 
         if ($commentContainer.children('.comment').length > 0) {
-            var $hr = $('<div></div>').
-                addClass('hr');
+            $hr = $('<div>')
+                .addClass('hr');
             $newCommentBox.after($hr);
         }
 
-        var $commentElement = $('<div></div>').
-            addClass('comment').
-            html(commentHtml);
+        $commentElement = $('<div>')
+            .addClass('comment')
+            .html(commentHtml);
         $newCommentBox.after($commentElement);
 
         $commentElement.find('.ratingUp').on('click', rateUp);
@@ -334,6 +330,8 @@ jQuery.noConflict();
     /* temporary stuff (will be removed as soon as the reddit data is stored permanently) */
     initSampleEntries();
     function initSampleEntries() {
+        var $commentContainer, comment;
+
         // sample text entry
         var reddit = {
             title: 'Text-Only-Beitrag',
@@ -352,8 +350,8 @@ jQuery.noConflict();
         };
         showReddit(reddit);
 
-        var $commentContainer = $('#reddits > .reddit > .comments').first();
-        var comment = {
+        $commentContainer = $('.comments').first();
+        comment = {
             profileName: 'claudio',
             text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
@@ -387,7 +385,7 @@ jQuery.noConflict();
         };
         showReddit(reddit);
 
-        $commentContainer = $('#reddits > .reddit > .comments').first();
+        $commentContainer = $('.comments').first();
         comment = {
             text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
