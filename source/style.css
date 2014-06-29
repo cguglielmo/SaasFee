@@ -1,3 +1,8 @@
+* {
+    /* http://css-tricks.com/box-sizing */
+    box-sizing: border-box;
+}
+
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     margin: 0 auto;
@@ -26,7 +31,7 @@ h1 {
 }
 
 header {
-    width: calc(100% - 30px);
+    width: 100%;
     border-bottom: 1px solid #777777;
     padding-left: 15px;
     padding-right: 15px;
@@ -40,7 +45,7 @@ header {
     font-weight: bold;
     position: absolute;
     margin:auto;
-    width: calc(100% - 30px);
+    width: 100%;
     padding-top: 20px;
 }
 
@@ -76,7 +81,7 @@ header button {
     display: inline-block;
     position: relative;
     float: left;
-    width: calc(100% - 30px);
+    width: 100%;
     padding: 10px 15px;
     background-color: white;
 }
@@ -115,7 +120,6 @@ input, textarea {
     max-width: 400px;
     margin-top: 2px;
     margin-bottom: 2px;
-    box-sizing: border-box;
 }
 
 #reddits {
@@ -131,7 +135,7 @@ input, textarea {
     padding-left: 75px;
     float: left;
     overflow: hidden;
-    width: calc(100% - 75px);
+    width: 100%;
 }
 
 .redditContent button,
