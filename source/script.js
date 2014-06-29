@@ -58,33 +58,6 @@ var redditTemplate = '\
           <button class="commentSubmit">Erfassen</button>\
         </div>\
       </div>';
-initSampleEntries();
-function initSampleEntries() {
-    // sample text entry
-    var reddit = {
-        title: 'Text-Only-Beitrag',
-        link: '',
-        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-    sit amet.',
-        rating: 1234
-    };
-    showReddit(reddit);
-
-    // sample video entry
-    reddit = {
-        title: 'Link zu Video',
-        link: '//www.youtube.com/embed/C-y70ZOSzE0',
-        text: '',
-        rating: 1234
-    };
-    showReddit(reddit);
-}
-
 function createNewReddit() {
     var titleField = document.getElementById('titleField');
     var linkField = document.getElementById('linkField');
@@ -320,4 +293,69 @@ function showComment($commentContainer, comment) {
 
     $commentElement.find('.ratingUp').on('click', rateUp);
     $commentElement.find('.ratingDown').on('click', rateDown);
+}
+
+/* temporary stuff (will be removed as soon as the reddit data is stored permanently) */
+initSampleEntries();
+function initSampleEntries() {
+    // sample text entry
+    var reddit = {
+        title: 'Text-Only-Beitrag',
+        link: '',
+        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet.',
+        rating: 1234
+    };
+    showReddit(reddit);
+
+    var $commentContainer = $('#reddits > .reddit > .comments').first();
+    var comment = {
+        profileName: 'claudio',
+        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet.',
+        date: '21/06/2014',
+        rating: 15
+    };
+    showComment($commentContainer, comment);
+    comment = {
+        profileName: 'andy',
+        text: 'Bla bla bla',
+        date: '29.06.2014',
+        rating: 1
+    };
+    showComment($commentContainer, comment);
+
+    // sample video entry
+    reddit = {
+        title: 'Link zu Video',
+        link: '//www.youtube.com/embed/C-y70ZOSzE0',
+        text: '',
+        rating: 1234
+    };
+    showReddit(reddit);
+
+    $commentContainer = $('#reddits > .reddit > .comments').first();
+    comment = {
+        profileName: 'claudio',
+        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet.',
+        date: '21/06/2014',
+        rating: 15
+    };
+    showComment($commentContainer, comment);
 }
