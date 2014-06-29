@@ -13,7 +13,7 @@ jQuery.noConflict();
             <div class="details">$profile$ $date$</div>\
             <p>$content$</p>\
             <div class="actionBar">\
-              <button class="newComment"><span>Kommentare (0)</span></button>\
+              <button class="newComment"><span>Kommentare</span><span class="commentCount">$commentCount$</span></button>\
               <button class="share"><span>Teilen</span></button>\
               <button class="more"><span>Mehr</span></button>\
             </div>\
@@ -96,7 +96,8 @@ jQuery.noConflict();
             text: textField.value,
             date: new Date(),
             author: currentUser,
-            rating: 0
+            rating: 0,
+            commentCount:  0
         };
 
         if (!reddit.title) {
@@ -131,6 +132,7 @@ jQuery.noConflict();
         redditHtml = redditHtml.replace('$rating$', reddit.rating);
         redditHtml = redditHtml.replace('$profile$', createProfileLinkTag(reddit.author));
         redditHtml = redditHtml.replace('$date$', reddit.date.toLocaleString());
+        redditHtml = redditHtml.replace('$commentCount$', reddit.commentCount);
 
         var $redditElement = $('<article>').
             addClass('reddit').
@@ -141,6 +143,8 @@ jQuery.noConflict();
         $redditElement.find('.commentSubmit').on('click', createNewComment);
         $redditElement.find('.ratingUp').on('click', rateUp);
         $redditElement.find('.ratingDown').on('click', rateDown);
+
+        $redditElement.data('reddit', reddit);
     }
 
     function parseLink(link) {
@@ -252,7 +256,7 @@ jQuery.noConflict();
     }
 
     function toggleComments(event) {
-        var newCommentSpan = $(event.currentTarget).find('span');
+        var newCommentSpan = $(event.currentTarget).find('span').first();
         var reddit = newCommentSpan.closest('.reddit');
         var comments = reddit.find('.comments');
 
@@ -266,18 +270,24 @@ jQuery.noConflict();
     function showComments($newCommentElement, $commentsElement) {
         $commentsElement.show();
 
-        $newCommentElement.html('Ausblenden (2)');
+        $newCommentElement.html('Ausblenden');
     }
 
     function hideComments($newCommentElement, $commentsElement) {
         $commentsElement.hide();
 
-        $newCommentElement.html('Kommentare (2)');
+        $newCommentElement.html('Kommentare');
     }
 
     function createNewComment(e) {
+        var $reddit = $(e.target).parents('.reddit');
+        var reddit = $reddit.data('reddit');
         var $comments = $(e.target).closest('.comments');
         var $commentField = $comments.find('.commentField');
+        var $commentCount = $reddit.find('.commentCount');
+
+        reddit.commentCount++;
+        $commentCount.text(reddit.commentCount);
 
         var comment = {
             author: currentUser,
@@ -337,7 +347,8 @@ jQuery.noConflict();
                 sit amet.',
             date: new Date(),
             author: currentUser,
-            rating: 1234
+            rating: 1234,
+            commentCount: 2
         };
         showReddit(reddit);
 
@@ -371,7 +382,8 @@ jQuery.noConflict();
             text: '',
             date: new Date(),
             author: currentUser,
-            rating: 1234
+            rating: 1234,
+            commentCount: 1
         };
         showReddit(reddit);
 

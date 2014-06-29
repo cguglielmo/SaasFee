@@ -27,10 +27,28 @@ h1 {
 
 header {
     width: calc(100% - 30px);
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid #777777;
     padding-left: 15px;
     padding-right: 15px;
     background-color: white;
+    position:relative;
+}
+
+#title {
+    text-align:center;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    margin:auto;
+    width: calc(100% - 30px);
+    padding-top: 20px;
+}
+
+/* generate block formatting context */
+header:after {
+    clear: both;
+    content: "";
+    display: block;
 }
 
 header button {
@@ -41,14 +59,13 @@ header button {
 
 #smartCategoryChooser {
     padding: 5px;
-    margin-bottom: 14px;
-    margin-top: 14px;
-    display: inline-block;
+    margin-top: 15px;
+    float: left;
 }
 
 #admin {
     float: right;
-    margin-top: 7px;
+    margin-top: 8px;
 }
 
 #admin > img {
@@ -98,6 +115,7 @@ input, textarea {
     max-width: 400px;
     margin-top: 2px;
     margin-bottom: 2px;
+    box-sizing: border-box;
 }
 
 #reddits {
@@ -194,6 +212,14 @@ input, textarea {
     content: url("images/comment_new.png");
 }
 
+.commentCount::before {
+    content: " (";
+}
+
+.commentCount::after {
+    content: ")";
+}
+
 .share::before {
     content: url("images/share.png");
 }
@@ -209,10 +235,6 @@ input, textarea {
 .comments .hr {
     margin-right: 100px;
     width: calc(100% - 150px);
-}
-
-.commentField {
-    width: 400px;
 }
 
 .commentSubmit {
@@ -247,8 +269,7 @@ input, textarea {
         width: 100%;
     }
 
-    .redditContent button > span,
-    .comment button > span {
+    .redditContent button > span:first-child {
         display: none;
     }
 
