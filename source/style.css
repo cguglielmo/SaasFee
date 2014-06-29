@@ -25,7 +25,7 @@ h1 {
  float: left;
 }
 
-#header {
+header {
   width: calc(100% - 30px);
   border-bottom: 1px solid lightgray;
   padding-left: 15px;
@@ -33,24 +33,24 @@ h1 {
   background-color: white;
 }
 
-#header button {
+header button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-.navButton {
+#smartCategoryChooser {
   padding: 5px;
   margin-bottom:14px;
   margin-top:14px;
   display: inline-block;
 }
 
-
 #admin {
  float: right;
  margin-top:7px;
 }
+
 #admin > img {
     height: 40px;
 }
@@ -67,7 +67,6 @@ h1 {
 #newRedditButton {
     float: right;
     line-height: 20px;
-    cursor: pointer;
 }
 
 #newRedditButton:hover {
@@ -207,6 +206,11 @@ input, textarea{
     padding-top: 20px;
 }
 
+.comments .hr {
+    margin-right: 100px;
+    width: calc(100% - 150px);
+}
+
 .commentField {
     width: 400px;
 }
@@ -219,7 +223,6 @@ input, textarea{
     font-size: 12px;
     color: grey;
 }
-
 
 .commentActionBar  {
     line-height: 30px;
@@ -267,7 +270,14 @@ input, textarea{
     }
 
     .hr {
-        margin: 15px 25px 15px 25px;
+        margin-right: 25px;
+        margin-left: 25px;
         width: calc(100% - 50px);
+    }
+
+    .comments .hr {
+        margin-right: 50px;
+        margin-left: 50px;
+        width: calc(100% - 100px);
     }
 }
