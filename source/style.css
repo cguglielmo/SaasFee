@@ -1,8 +1,3 @@
-* {
-    /* http://css-tricks.com/box-sizing */
-    box-sizing: border-box;
-}
-
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     margin: 0 auto;
@@ -31,6 +26,7 @@ h1 {
 }
 
 header {
+    box-sizing: border-box;
     width: 100%;
     border-bottom: 1px solid #777777;
     padding-left: 15px;
@@ -40,12 +36,13 @@ header {
 }
 
 #title {
+    box-sizing: border-box;
+    width: 100%;
     text-align:center;
     font-size: 16px;
     font-weight: bold;
     position: absolute;
     margin:auto;
-    width: 100%;
     padding-top: 20px;
 }
 
@@ -81,6 +78,7 @@ header button {
     display: inline-block;
     position: relative;
     float: left;
+    box-sizing: border-box;
     width: 100%;
     padding: 10px 15px;
     background-color: white;
@@ -116,6 +114,7 @@ header button {
 }
 
 input, textarea {
+    box-sizing: border-box;
     width: 100%;
     max-width: 400px;
     margin-top: 2px;
@@ -135,6 +134,7 @@ input, textarea {
     padding-left: 75px;
     float: left;
     overflow: hidden;
+    box-sizing: border-box;
     width: 100%;
 }
 
