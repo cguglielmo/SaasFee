@@ -24,7 +24,7 @@
     <option globalstrict="false" />
     <option immed="false" />
     <option iterator="false" />
-    <option jquery="false" />
+    <option jquery="true" />
     <option lastsemic="false" />
     <option latedef="false" />
     <option laxbreak="false" />
