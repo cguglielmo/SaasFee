@@ -1,6 +1,6 @@
 jQuery.noConflict();
-(function( $ ) {
-    var currentUser='anonymous';
+(function ($) {
+    var currentUser = 'anonymous';
 
     var redditTemplate = '\
           <div class="redditContent">\
@@ -41,7 +41,7 @@ jQuery.noConflict();
 
     initNewRedditBox();
 
-    String.prototype.nl2br = function() {
+    String.prototype.nl2br = function () {
         return this.replace(/\n/g, "<br>");
     }
 
@@ -100,14 +100,14 @@ jQuery.noConflict();
         };
 
         if (!reddit.title) {
-           reddit.title = reddit.link;
+            reddit.title = reddit.link;
         }
 
         showReddit(reddit);
     }
 
     function showReddit(reddit) {
-        var content = '', title='';
+        var content = '', title = '';
         if (reddit.link) {
             var link = reddit.link;
             var url = parseLink(link);
@@ -145,11 +145,11 @@ jQuery.noConflict();
 
     function parseLink(link) {
         var url = {}, index, length;
-        if(link.indexOf('//') === 0) {
+        if (link.indexOf('//') === 0) {
             url.scheme = '//';
             url.path = link.substr(2);
         }
-        else if(link.indexOf('http://') === 0 || link.indexOf('https://') === 0) {
+        else if (link.indexOf('http://') === 0 || link.indexOf('https://') === 0) {
             index = link.indexOf(':');
             url.scheme = link.substr(0, index);
             url.path = link.substr(index + 3);
@@ -157,13 +157,13 @@ jQuery.noConflict();
         else {
             url.scheme = 'http';
             url.path = link;
-            link = url.scheme +'://' + url.path;
+            link = url.scheme + '://' + url.path;
         }
 
         var indexSlash = url.path.indexOf('/');
-        if(indexSlash > 0) {
+        if (indexSlash > 0) {
             url.domain = url.path.substr(0, indexSlash);
-            url.path= url.path.substr(indexSlash+1);
+            url.path = url.path.substr(indexSlash + 1);
         }
         else {
             url.domain = url.path;
@@ -196,7 +196,7 @@ jQuery.noConflict();
             var src = url.fullUrl;
             if (src.indexOf('embed') < 0) {
                 var path = url.path;
-                if(path.indexOf('watch?v=') >= 0) {
+                if (path.indexOf('watch?v=') >= 0) {
                     path = path.replace('watch?v=', '');
                 }
                 src = '//www.youtube.com/embed/' + path;
@@ -237,10 +237,10 @@ jQuery.noConflict();
     }
 
     function rateUp(event) {
-       var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
-       var rating = ratingDiv.textContent;
-       rating++;
-       ratingDiv.textContent = rating;
+        var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
+        var rating = ratingDiv.textContent;
+        rating++;
+        ratingDiv.textContent = rating;
     }
 
 
