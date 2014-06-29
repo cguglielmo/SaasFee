@@ -6,6 +6,10 @@ initNewRedditButton();
 $('.newComment').on('click', toogleComments);
 $('.commentSubmit').on('click', createNewComment);
 
+String.prototype.nl2br = function() {
+    return this.replace(/\n/g, "<br>");
+}
+
 function showNewRedditBox() {
     var newRedditContent = document.getElementById('newRedditBox');
     newRedditBox.style.display = 'inline-block';
@@ -111,7 +115,7 @@ function showReddit(reddit) {
     }
     else {
         title = reddit.title;
-        content = reddit.text.replace(new RegExp('\n', 'g'), '<br>');
+        content = reddit.text.nl2br();
     }
 
     var $reddits = $('#reddits');
@@ -295,7 +299,7 @@ function showComment($commentContainer, comment) {
     var profileName = comment.profileName;
     var profileLink = 'profile/' + profileName;
 
-    var commentHtml = commentTemplate.replace('$comment$', comment.text);
+    var commentHtml = commentTemplate.replace('$comment$', comment.text.nl2br());
     commentHtml = commentHtml.replace('$profileLink$', profileLink);
     commentHtml = commentHtml.replace('$profileName$', profileName);
     commentHtml = commentHtml.replace('$commentDate$', comment.date);
