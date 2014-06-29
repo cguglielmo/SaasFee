@@ -9,115 +9,22 @@
 <body>
 
 <div id="header">
-    <div id="subredditChooser" class="navButton">My Subreddits</div>
-    <div id="smartCategoryChooser" class="navButton">Beliebt</div>
-    <div id="admin"><img src="images/user.png"></div>
+    <button id="smartCategoryChooser" class="navButton">Beliebt</button>
+    <button id="admin"><img src="images/user.png"></button>
 </div>
 
 <div id="content">
-    <div id="newRedditButton"></div>
-    <div id="newRedditBox" style="display:none">
+    <button id="newRedditButton"></button>
+    <div id="newRedditBox" style="display:none" >
         <input type="text" id="titleField" placeholder="Title"><br>
         <input type="text" id="linkField" placeholder="Link"><br>
-        <textarea id="textField" placeholder="Text"></textarea><br>
-        <button id="redditSubmit" onclick="createNewReddit()">Erfassen</button>
+        <textarea id="textField" placeholder="Text"></textarea>
+        <p>
+          <button id="redditSubmit" onclick="createNewReddit()">Erfassen</button>
+        </p>
     </div>
     <div id="reddits">
-        <div class="reddit">
-            <div class="redditContent">
-                <div class="rating">
-                    <button class="ratingUp" onclick="rateUp()"></button>
-                    <div class="ratingValue">1234</div>
-                    <button class="ratingDown" onclick="rateDown()"></button>
-                </div>
-                <h1>Link zu Video</h1>
-                <div class="details">21.03.2014 by bruno</div>
-                <p><video></video></p>
-                <div class="actionBar">
-                    <button class="newComment"><span>Kommentare (2)</span></button>
-                    <button class="share"><span>Teilen</span></button>
-                    <button class="more"><span>Mehr</span></button>
-                </div>
-            </div>
-            <div class="comments" style="display:none">
-                <div class="newCommentContent">
-                    <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
-                    <button class="commentSubmit">Erfassen</button>
-                </div>
-                <div class="comment">
-                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
-                    <p>
-                        Das ist so ein schöner Link.
-                    </p>
-                    <div class="commentActionBar">
-                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
-                                class="ratingUp"></span></div>
-                    </div>
-                </div>
-                <div class="hr"></div>
-                <div class="comment">
-                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
-                    <p>
-                        Das ist so ein schöner Link.
-                    </p>
-                    <div class="commentActionBar">
-                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
-                                class="ratingUp"></span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hr"></div>
-        <div class="reddit">
-            <div class="redditContent">
-                <div class="rating">
-                    <button class="ratingUp" onclick="rateUp()"></button>
-                    <div class="ratingValue">1234</div>
-                    <button class="ratingDown" onclick="rateDown()"></button>
-                </div>
-                <h1>Text-Only-Beitrag</h1>
-                <div class="details">21.05.2014 by claudio</div>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                    sit amet.</p>
-                <div class="actionBar">
-                    <span class="newComment">Kommentare (2)</span>
-                    <span class="share">Teilen</span>
-                    <span class="more">Mehr</span>
-                </div>
-            </div>
-            <div class="comments" style="display:none">
-                <div class="newCommentContent">
-                    <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
-                    <button class="commentSubmit">Erfassen</button>
-                </div>
-                <div class="comment">
-                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
-                    <p>
-                        Das ist so ein schöner Link.
-                    </p>
-                    <div class="commentActionBar">
-                        <div class="commentRating"><span class="ratingDown"></span><span>1234</span><span
-                                class="ratingUp"></span></div>
-                    </div>
-                </div>
-                <div class="hr"></div>
-                <div class="comment">
-                    <div class="commentDetails"><a href="profile/claudio">claudio</a> 3 weeks ago</div>
-                    <p>
-                        Das ist so ein schöner Link.
-                    </p>
-                    <div class="commentActionBar">
-                        <div class="commentRating"><span class="commentRatingDown"></span><span>1234</span><span
-                                class="commentRatingUp"></span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

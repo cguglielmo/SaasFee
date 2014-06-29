@@ -2,6 +2,8 @@
 //document.getElementsByTagName('body')[0].style.backgroundColor = '#'+color;
 //rgb(82, 130, 104)
 
+var currentUser='anonymous';
+
 initNewRedditButton();
 $('.newComment').on('click', toogleComments);
 $('.commentSubmit').on('click', createNewComment);
@@ -11,8 +13,8 @@ String.prototype.nl2br = function() {
 }
 
 function showNewRedditBox() {
-    var newRedditContent = document.getElementById('newRedditBox');
-    newRedditBox.style.display = 'inline-block';
+    var $newRedditContent = $('#newRedditBox');
+    $newRedditContent.show();
 
     var newRedditButton = document.getElementById('newRedditButton');
     newRedditButton.innerHTML = 'Abbrechen';
@@ -44,7 +46,7 @@ var redditTemplate = '\
           <button class="ratingDown"></button>\
         </div>\
         <h1>$title$</h1>\
-        <div class="details">24.06.2014 by bruno</div>\
+        <div class="details">$profile$ $date$</div>\
         <p>$content$</p>\
         <div class="actionBar">\
           <button class="newComment"><span>Kommentare (0)</span></button>\
@@ -53,9 +55,11 @@ var redditTemplate = '\
         </div>\
       </div>\
       <div class="comments" style="display:none">\
-        <div class="newCommentContent">\
+        <div class="newCommentBox">\
           <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>\
-          <button class="commentSubmit">Erfassen</button>\
+          <p>\
+            <button class="commentSubmit">Erfassen</button>\
+          </p>\
         </div>\
       </div>';
 function createNewReddit() {
@@ -67,6 +71,8 @@ function createNewReddit() {
         title: titleField.value,
         link: linkField.value,
         text: textField.value,
+        date: new Date(),
+        author: currentUser,
         rating: 0
     };
 
@@ -100,6 +106,8 @@ function showReddit(reddit) {
     var redditHtml = redditTemplate.replace('$title$', title);
     redditHtml = redditHtml.replace('$content$', content);
     redditHtml = redditHtml.replace('$rating$', reddit.rating);
+    redditHtml = redditHtml.replace('$profile$', createProfileLinkTag(reddit.author));
+    redditHtml = redditHtml.replace('$date$', reddit.date.toLocaleString());
 
     var $redditElement = $('<div></div>').
         addClass('reddit').
@@ -205,7 +213,7 @@ function checkExtension(extension, types) {
     return false;
 }
 
-function rateUp() {
+function rateUp(event) {
    var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
    var rating = ratingDiv.textContent;
    rating++;
@@ -213,15 +221,15 @@ function rateUp() {
 }
 
 
-function rateDown() {
+function rateDown(event) {
     var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
     var rating = ratingDiv.textContent;
     rating--;
     ratingDiv.textContent = rating;
 }
 
-function toogleComments(e) {
-    var newCommentSpan = $(e.currentTarget).find('span');
+function toogleComments(event) {
+    var newCommentSpan = $(event.currentTarget).find('span');
     var reddit = newCommentSpan.closest('.reddit');
     var comments = reddit.find('.comments');
 
@@ -233,19 +241,19 @@ function toogleComments(e) {
 }
 
 function showComments($newCommentElement, $commentsElement) {
-    $commentsElement.css('display', 'inline-block');
+    $commentsElement.show();
 
     $newCommentElement.html('Ausblenden (2)');
 }
 
 function hideComments($newCommentElement, $commentsElement) {
-    $commentsElement.css('display', 'none');
+    $commentsElement.hide();
 
     $newCommentElement.html('Kommentare (2)');
 }
 
 var commentTemplate = '\
-        <div class="commentDetails"><a href="$profileLink$">$profileName$</a> $commentDate$</div>\
+        <div class="commentDetails">$profile$ $commentDate$</div>\
         <p>$comment$</p>\
         <div class="commentActionBar">\
             <div class="commentRating">\
@@ -259,37 +267,42 @@ function createNewComment(e) {
     var $commentField = $comments.find('.commentField');
 
     var comment = {
-        profileName: 'claudio',
+        author: currentUser,
         text: $commentField.val(),
-        date: '21/06/2014',
+        date: new Date(),
         rating: 0
     };
 
     showComment($comments, comment);
 }
 
-function showComment($commentContainer, comment) {
-    var profileName = comment.profileName;
+function createProfileLinkTag(profileName) {
+    var tag = '<a href="$profileLink$">$profileName$</a>';
     var profileLink = 'profile/' + profileName;
 
+    tag = tag.replace('$profileLink$', profileLink);
+    tag = tag.replace('$profileName$', profileName);
+    return tag;
+}
+
+function showComment($commentContainer, comment) {
     var commentHtml = commentTemplate.replace('$comment$', comment.text.nl2br());
-    commentHtml = commentHtml.replace('$profileLink$', profileLink);
-    commentHtml = commentHtml.replace('$profileName$', profileName);
-    commentHtml = commentHtml.replace('$commentDate$', comment.date);
+    commentHtml = commentHtml.replace('$profile$', createProfileLinkTag(comment.author));
+    commentHtml = commentHtml.replace('$commentDate$', comment.date.toLocaleString());
     commentHtml = commentHtml.replace('$rating$', comment.rating);
 
-    var $newCommentContent = $commentContainer.children('.newCommentContent');
+    var $newCommentBox = $commentContainer.children('.newCommentBox');
 
     if ($commentContainer.children('.comment').length > 0) {
         var $hr = $('<div></div>').
             addClass('hr');
-        $newCommentContent.after($hr);
+        $newCommentBox.after($hr);
     }
 
     var $commentElement = $('<div></div>').
         addClass('comment').
         html(commentHtml);
-    $newCommentContent.after($commentElement);
+    $newCommentBox.after($commentElement);
 
     $commentElement.find('.ratingUp').on('click', rateUp);
     $commentElement.find('.ratingDown').on('click', rateDown);
@@ -309,6 +322,8 @@ function initSampleEntries() {
             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
             duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
             sit amet.',
+        date: new Date(),
+        author: currentUser,
         rating: 1234
     };
     showReddit(reddit);
@@ -323,14 +338,15 @@ function initSampleEntries() {
             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
             duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
             sit amet.',
-        date: '21/06/2014',
+        date: new Date(),
+        author: currentUser,
         rating: 15
     };
     showComment($commentContainer, comment);
     comment = {
-        profileName: 'andy',
         text: 'Bla bla bla',
-        date: '29.06.2014',
+        date: new Date(),
+        author: currentUser,
         rating: 1
     };
     showComment($commentContainer, comment);
@@ -340,13 +356,14 @@ function initSampleEntries() {
         title: 'Link zu Video',
         link: '//www.youtube.com/embed/C-y70ZOSzE0',
         text: '',
+        date: new Date(),
+        author: currentUser,
         rating: 1234
     };
     showReddit(reddit);
 
     $commentContainer = $('#reddits > .reddit > .comments').first();
     comment = {
-        profileName: 'claudio',
         text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
             duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
@@ -354,7 +371,8 @@ function initSampleEntries() {
             invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
             duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
             sit amet.',
-        date: '21/06/2014',
+        date: new Date(),
+        author: currentUser,
         rating: 15
     };
     showComment($commentContainer, comment);

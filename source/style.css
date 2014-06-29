@@ -2,6 +2,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0 auto;
   max-width: 800px;
+  min-width: 270px;
   background-color: rgb(135, 180, 155);
 }
 
@@ -32,12 +33,19 @@ h1 {
   background-color: white;
 }
 
+#header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .navButton {
   padding: 5px;
   margin-bottom:14px;
   margin-top:14px;
   display: inline-block;
 }
+
 
 #admin {
  float: right;
@@ -75,16 +83,22 @@ h1 {
 }
 
 #newRedditBox {
-    width: 100%;
-    padding-top: 15px;
+    padding-top: 30px;
     padding-bottom: 15px;
     padding-left: 75px;
 }
 
-#titleField,
-#linkField,
-#textField {
-    width: 400px;
+#newRedditBox p,
+.newCommentBox p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+input, textarea{
+    width: 100%;
+    max-width: 400px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 #reddits {
@@ -104,7 +118,8 @@ h1 {
 }
 
 .redditContent button,
-.comment button {
+.comment button,
+#newRedditButton {
     background-color: transparent;
     border: none;
     cursor: pointer;
