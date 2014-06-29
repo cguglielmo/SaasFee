@@ -1,5 +1,7 @@
 jQuery.noConflict();
 (function ($) {
+    "use strict";
+
     var currentUser = 'anonymous';
 
     var redditTemplate = '\
@@ -42,7 +44,7 @@ jQuery.noConflict();
     initNewRedditBox();
 
     function nl2br(s) {
-        return s.replace(/\n/g, "<br>");
+        return s.replace(/\n/g, '<br>');
     }
 
     function initNewRedditBox() {
