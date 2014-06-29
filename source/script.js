@@ -333,48 +333,40 @@ jQuery.noConflict();
     /* temporary stuff (will be removed as soon as the reddit data is stored permanently) */
     initSampleEntries();
     function initSampleEntries() {
-        var $commentContainer, comment;
-
-        // sample text entry
-        var reddit = {
-            title: 'Text-Only-Beitrag',
-            link: '',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+        var reddit, comments;
+        var textLoremIpsum = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
                 duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
                 sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
                 duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-                sit amet.',
+                sit amet.';
+
+        // sample text entry
+        reddit = {
+            title: 'Text-Only-Beitrag',
+            link: '',
+            text: textLoremIpsum,
             date: new Date(),
             author: currentUser,
             rating: 1234,
             commentCount: 2
         };
-        showReddit(reddit);
-
-        $commentContainer = $('.comments').first();
-        comment = {
-            profileName: 'claudio',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-                duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-                sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-                duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-                sit amet.',
-            date: new Date(),
-            author: currentUser,
-            rating: 15
-        };
-        showComment($commentContainer, comment);
-        comment = {
-            text: 'Bla bla bla',
-            date: new Date(),
-            author: currentUser,
-            rating: 1
-        };
-        showComment($commentContainer, comment);
+        comments = [
+            {
+                text: textLoremIpsum,
+                date: new Date(),
+                author: currentUser,
+                rating: 15
+            },
+            {
+                text: 'Bla bla bla',
+                date: new Date(),
+                author: currentUser,
+                rating: 1
+            }
+        ];
+        initSampleEntry(reddit, comments);
 
         // sample video entry
         reddit = {
@@ -386,21 +378,56 @@ jQuery.noConflict();
             rating: 1234,
             commentCount: 1
         };
+        comments = [
+            {
+                text: textLoremIpsum,
+                date: new Date(),
+                author: currentUser,
+                rating: 15
+            }
+        ];
+        initSampleEntry(reddit, comments);
+
+        // sample image entry
+        reddit = {
+            title: 'Link zu Bild',
+            link: 'http://www.ticketcorner.ch/obj/media/CH-eventim/galery/222x222/s/sfv-tickets.gif',
+            text: '',
+            date: new Date(),
+            author: currentUser,
+            rating: 15000,
+            commentCount: 3
+        };
+        comments = [
+            {
+                text: textLoremIpsum,
+                date: new Date(),
+                author: currentUser,
+                rating: 0
+            },
+            {
+                text: 'Hopp Schwiiizzz...',
+                date: new Date(),
+                author: currentUser,
+                rating: 1
+            },
+            {
+                text: 'Super Bild!',
+                date: new Date(),
+                author: currentUser,
+                rating: 15
+            }
+        ];
+        initSampleEntry(reddit, comments);
+    }
+
+    function initSampleEntry(reddit, comments) {
+        var $commentContainer;
         showReddit(reddit);
 
         $commentContainer = $('.comments').first();
-        comment = {
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-                duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-                sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-                duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-                sit amet.',
-            date: new Date(),
-            author: currentUser,
-            rating: 15
-        };
-        showComment($commentContainer, comment);
+        comments.forEach(function initSampleComment(comment) {
+            showComment($commentContainer, comment);
+        });
     }
 })(jQuery);
