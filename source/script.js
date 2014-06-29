@@ -250,14 +250,14 @@ jQuery.noConflict();
     }
 
     function toggleComments(event) {
-        var newCommentSpan = $(event.currentTarget).find('span').first();
-        var reddit = newCommentSpan.closest('.reddit');
-        var comments = reddit.find('.comments');
+        var $newCommentSpan = $(event.currentTarget).find('span').first();
+        var $reddit = $newCommentSpan.closest('.reddit');
+        var $comments = $reddit.find('.comments');
 
-        if (comments.css('display') === 'none') {
-            showComments(newCommentSpan, comments);
+        if ($comments.css('display') === 'none') {
+            showComments($newCommentSpan, $comments);
         } else {
-            hideComments(newCommentSpan, comments);
+            hideComments($newCommentSpan, $comments);
         }
     }
 
@@ -273,11 +273,12 @@ jQuery.noConflict();
         $newCommentElement.html('Kommentare');
     }
 
-    function createNewComment(e) {
+    function createNewComment(event) {
         var comment;
-        var $reddit = $(e.target).parents('.reddit');
+        var $commentButton = $(event.target);
+        var $reddit = $commentButton.parents('.reddit');
         var reddit = $reddit.data('reddit');
-        var $comments = $(e.target).closest('.comments');
+        var $comments = $commentButton.closest('.comments');
         var $commentField = $comments.find('.commentField');
         var $commentCount = $reddit.find('.commentCount');
 
@@ -400,5 +401,4 @@ jQuery.noConflict();
         };
         showComment($commentContainer, comment);
     }
-
 })(jQuery);
