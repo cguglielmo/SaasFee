@@ -68,6 +68,10 @@ jQuery.noConflict();
     }
 
     function showNewRedditBox($newRedditBox) {
+        if (!$newRedditBox) {
+            $newRedditBox = $('#newRedditBox');
+        }
+
         $newRedditBox.show();
 
         $('#newRedditButton')
@@ -76,6 +80,10 @@ jQuery.noConflict();
     }
 
     function hideNewRedditBox($newRedditBox) {
+       if (!$newRedditBox) {
+           $newRedditBox = $('#newRedditBox');
+       }
+
        $newRedditBox.hide();
 
         $('#newRedditButton')
@@ -102,6 +110,7 @@ jQuery.noConflict();
             reddit.title = reddit.link;
         }
 
+        hideNewRedditBox();
         showReddit(reddit);
     }
 
