@@ -36,13 +36,9 @@ header {
 }
 
 #title {
-    box-sizing: border-box;
-    left: 0px;
-    width: 100%;
     text-align:center;
     font-size: 16px;
     font-weight: bold;
-    position: absolute;
     padding-top: 20px;
 }
 
@@ -65,6 +61,21 @@ header button {
     float: left;
 }
 
+#smartCategoryBox {
+    position:absolute;
+    border: 1px solid #777777;
+    z-index: 10;
+    padding: 0px;
+    background-color: white;
+}
+
+#smartCategoryBox div {
+    padding: 5px;
+ }
+
+#smartCategoryBox div:hover {
+    background-color: #eeeeee;
+}
 #admin {
     float: right;
     margin-top: 8px;

@@ -4,6 +4,9 @@ jQuery.noConflict();
 
     var currentUser = 'anonymous';
 
+    // Changing the category has no effect yet since the server will be responsible to return the correct reddits for the specified category.
+    var currentCategory = 'Beliebt';
+
     var redditTemplate = '\
           <div class="redditContent">\
             <div class="rating">\
@@ -42,6 +45,7 @@ jQuery.noConflict();
 
 
     initNewRedditBox();
+    initSmartCategoryChooser();
 
     function nl2br(s) {
         return s.replace(/\n/g, '<br>');
@@ -89,6 +93,42 @@ jQuery.noConflict();
         $('#newRedditButton')
             .text('Neuer Reddit erfassen')
             .addClass('newRedditBoxHidden');
+    }
+
+    function initSmartCategoryChooser() {
+        var $smartCategoryChooser = $('#smartCategoryChooser');
+        var $smartCategoryBox = $('#smartCategoryBox');
+        $smartCategoryChooser.on('click', toggleSmartCategoryBox);
+
+        $smartCategoryChooser.text(currentCategory);
+    }
+
+    function toggleSmartCategoryBox() {
+        var $smartCategoryBox = $('#smartCategoryBox');
+
+        if ($smartCategoryBox.css('display') === 'none') {
+            showSmartCategoryBox($smartCategoryBox);
+        } else {
+            hideSmartCategoryBox($smartCategoryBox);
+        }
+    }
+
+    function hideSmartCategoryBox($smartCategoryBox) {
+        if (!$smartCategoryBox) {
+            $smartCategoryBox = $('#smartCategoryBox');
+        }
+
+        $smartCategoryBox.hide();
+    }
+
+    function showSmartCategoryBox($smartCategoryBox) {
+        var $smartCategoryChooser = $('#smartCategoryChooser');
+        if (!$smartCategoryBox) {
+            $smartCategoryBox = $('#smartCategoryBox');
+        }
+
+        $smartCategoryBox.css('top', $smartCategoryChooser.position().top + $smartCategoryChooser.outerHeight(true));
+        $smartCategoryBox.show();
     }
 
     function createNewReddit() {
