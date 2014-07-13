@@ -39,7 +39,7 @@ header {
     text-align:center;
     font-size: 16px;
     font-weight: bold;
-    padding-top: 20px;
+    padding-top: 19px;
 }
 
 /* generate block formatting context */
@@ -57,20 +57,24 @@ header button {
 
 #smartCategoryChooser {
     padding: 5px;
-    margin-top: 15px;
+    margin: 15px 0px;
     float: left;
+    font-size: 14px;
 }
 
 #smartCategoryBox {
     position:absolute;
     border: 1px solid #777777;
+    margin-left: -1px;
     z-index: 10;
     padding: 0px;
     background-color: white;
+    box-shadow: 2px 2px 2px #ccc;
 }
 
 #smartCategoryBox div {
     padding: 5px;
+    color: black;
  }
 
 #smartCategoryBox div:hover {

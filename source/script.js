@@ -127,7 +127,7 @@ jQuery.noConflict();
             $smartCategoryBox = $('#smartCategoryBox');
         }
 
-        $smartCategoryBox.css('top', $smartCategoryChooser.position().top + $smartCategoryChooser.outerHeight(true));
+        $smartCategoryBox.css('top', $smartCategoryChooser.offset().top + $smartCategoryChooser.outerHeight());
         $smartCategoryBox.show();
     }
 
