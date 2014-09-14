@@ -391,6 +391,35 @@ jQuery.noConflict();
                 duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
                 sit amet.';
 
+
+        var ajaxRequest;
+        var redditsHandler;
+        var commentsHandler;
+
+        ajaxRequest = function(url, successHandler) {
+            $.ajax(
+                url,
+                {
+                    error: function(jqXhr, textStatus, errorText) {
+                        console.log('request errored: ' + textStatus + ' / ' + errorText);
+                    },
+                    success: function(data, textStatus, jqXhr) {
+                        console.log('request succeeded');
+                        successHandler(data);
+                    }
+                }
+            );
+        };
+
+
+        redditsHandler = function(reddits) {
+            commentsHandler = function(comments) {
+                initSampleEntry(reddits[0], comments);
+            };
+            ajaxRequest('/data/reddits/' + 1 + '/comments', commentsHandler);
+        };
+        ajaxRequest('/data/reddits', redditsHandler);
+
         // sample text entry
         reddit = {
             title: 'Text-Only-Beitrag',
@@ -472,11 +501,12 @@ jQuery.noConflict();
 
     function initSampleEntry(reddit, comments) {
         var $commentContainer;
+        var commentId;
         showReddit(reddit);
 
         $commentContainer = $('.comments').first();
-        comments.forEach(function initSampleComment(comment) {
-            showComment($commentContainer, comment);
-        });
+        for (commentId in comments) {
+            showComment($commentContainer, comments[commentId]);
+        }
     }
 })(jQuery);
