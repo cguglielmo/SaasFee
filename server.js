@@ -8,7 +8,8 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(express.static(path.join(__dirname, 'source')));
+app.use(express.static(path.join(__dirname, 'app')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use('/data', data);
 

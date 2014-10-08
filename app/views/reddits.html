@@ -1,0 +1,30 @@
+<div id="reddits" >
+
+    <article class="reddit" ng-repeat="reddit in reddits">
+        <div class="redditContent">
+            <div class="rating">
+                <button class="ratingUp"></button>
+                <div class="ratingValue" ng-bind="reddit.rating"></div>
+                <button class="ratingDown"></button>
+            </div>
+            <h1 reddittitle reddit="reddit"></h1>
+            <div class="details">{{reddit.profile}} {{reddit.date}}</div>
+            <p redditcontent reddit="reddit"></p>
+            <div class="actionBar">
+                <button class="newComment"><span>Kommentare</span><span class="commentCount" ng-bind="reddit.commentCount"></span></button>
+                <button class="share"><span>Teilen</span></button>
+                <button class="more"><span>Mehr</span></button>
+            </div>
+        </div>
+        <div class="comments" style="display:none">
+            <div class="newCommentBox">
+                <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
+                <p>
+                    <button class="commentSubmit">Erfassen</button>
+                </p>
+            </div>
+        </div>
+        <div class="hr"></div>
+    </article>
+
+</div>

@@ -114,7 +114,7 @@ header button {
     margin-right: 5px;
     vertical-align: middle;
     line-height: normal;
-    content: url("images/add.png");
+    content: url("../images/add.png");
 }
 
 #newRedditBox {
@@ -192,13 +192,13 @@ input, textarea {
 }
 
 .ratingUp::before {
-    content: url("images/rating_up.png");
+    content: url("../images/rating_up.png");
     width: 18px;
     height: 18px;
 }
 
 .ratingDown::before {
-    content: url("images/rating_down.png");
+    content: url("../images/rating_down.png");
     width: 18px;
     height: 18px;
 }
@@ -229,7 +229,7 @@ input, textarea {
 }
 
 .newComment::before {
-    content: url("images/comment_new.png");
+    content: url("../images/comment_new.png");
 }
 
 .commentCount::before {
@@ -241,11 +241,11 @@ input, textarea {
 }
 
 .share::before {
-    content: url("images/share.png");
+    content: url("../images/share.png");
 }
 
 .more::before {
-    content: url("images/more.png");
+    content: url("../images/more.png");
 }
 
 .comments {
