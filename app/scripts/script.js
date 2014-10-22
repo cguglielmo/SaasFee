@@ -19,54 +19,10 @@ jQuery.noConflict();
             </div>';
 
 
-    initNewRedditBox();
+
     initSmartCategoryChooser();
 
 
-
-    function initNewRedditBox() {
-        var $newRedditButton = $('#newRedditButton');
-        var $newRedditBox = $('#newRedditBox');
-        var $redditSubmit = $newRedditBox.find('#redditSubmit');
-
-        hideNewRedditBox($newRedditBox);
-        $newRedditButton.on('click', toggleNewRedditBox);
-        $redditSubmit.on('click', createNewReddit);
-    }
-
-    function toggleNewRedditBox() {
-        var $newRedditBox = $('#newRedditBox');
-
-        if ($newRedditBox.css('display') === 'none') {
-            showNewRedditBox($newRedditBox);
-        } else {
-            hideNewRedditBox($newRedditBox);
-        }
-    }
-
-    function showNewRedditBox($newRedditBox) {
-        if (!$newRedditBox) {
-            $newRedditBox = $('#newRedditBox');
-        }
-
-        $newRedditBox.show();
-
-        $('#newRedditButton')
-            .text('Abbrechen')
-            .removeClass('newRedditBoxHidden');
-    }
-
-    function hideNewRedditBox($newRedditBox) {
-       if (!$newRedditBox) {
-           $newRedditBox = $('#newRedditBox');
-       }
-
-       $newRedditBox.hide();
-
-        $('#newRedditButton')
-            .text('Neuer Reddit erfassen')
-            .addClass('newRedditBoxHidden');
-    }
 
     function initSmartCategoryChooser() {
         var $smartCategoryChooser = $('#smartCategoryChooser');
@@ -104,86 +60,11 @@ jQuery.noConflict();
         $smartCategoryBox.show();
     }
 
-    function createNewReddit() {
-        var titleField = document.getElementById('titleField');
-        var linkField = document.getElementById('linkField');
-        var textField = document.getElementById('textField');
-
-        var reddit = {
-            title: titleField.value,
-            link: linkField.value,
-            text: textField.value,
-            date: new Date(),
-            author: currentUser,
-            rating: 0,
-            commentCount:  0
-        };
-
-        if (!reddit.title) {
-            reddit.title = reddit.link;
-        }
-
-        hideNewRedditBox();
-        showReddit(reddit);
-    }
-
-    function showReddit(reddit) {
-        var $redditElement, redditHtml, hr, $reddits, link, url;
-        var content = '', title = '';
-        if (reddit.link) {
-            link = reddit.link;
-            url = parseLink(link);
-
-            title = '<a href="' + url.fullUrl + '">' + reddit.title + '</a>';
-            content = createContent(url);
-        }
-        else {
-            title = reddit.title;
-            content = nl2br(reddit.text);
-        }
-
-        $reddits = $('#reddits');
-
-        hr = document.createElement('div');
-        hr.setAttribute('class', 'hr');
-        $reddits.prepend(hr);
-
-        redditHtml = redditTemplate.replace('$title$', title);
-        redditHtml = redditHtml.replace('$content$', content);
-        redditHtml = redditHtml.replace('$rating$', reddit.rating);
-        redditHtml = redditHtml.replace('$profile$', createProfileLinkTag(reddit.author));
-        redditHtml = redditHtml.replace('$date$', reddit.date.toLocaleString());
-        redditHtml = redditHtml.replace('$commentCount$', reddit.commentCount);
-
-        $redditElement = $('<article>')
-            .addClass('reddit')
-            .html(redditHtml);
-        $reddits.prepend($redditElement);
-
-        $redditElement.find('.newComment').on('click', toggleComments);
-        $redditElement.find('.commentSubmit').on('click', createNewComment);
-        $redditElement.find('.ratingUp').on('click', rateUp);
-        $redditElement.find('.ratingDown').on('click', rateDown);
-
-        $redditElement.data('reddit', reddit);
-    }
 
 
 
-    function rateUp(event) {
-        var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
-        var rating = ratingDiv.textContent;
-        rating++;
-        ratingDiv.textContent = rating;
-    }
 
 
-    function rateDown(event) {
-        var ratingDiv = event.target.parentNode.querySelector('.ratingValue');
-        var rating = ratingDiv.textContent;
-        rating--;
-        ratingDiv.textContent = rating;
-    }
 
     function toggleComments(event) {
         var $newCommentSpan = $(event.currentTarget).find('span').first();

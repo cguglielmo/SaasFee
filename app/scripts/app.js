@@ -13,10 +13,14 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/reddits.html',
-        controller: 'RedditsCtrl'
+        controller: 'RedditsCtrl',
+        resolve: { 'reddits': ['repository', function (repository) {
+            return repository.loadReddits();
+        }]
+        }
       })
       .when('/about', {
-        templateUrl: 'views/newReddit.html',
+        templateUrl: '../views/newReddit.html',
         controller: 'NewRedditCtrl'
       })
       .otherwise({

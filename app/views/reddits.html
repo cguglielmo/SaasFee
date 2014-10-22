@@ -3,9 +3,9 @@
     <article class="reddit" ng-repeat="reddit in reddits">
         <div class="redditContent">
             <div class="rating">
-                <button class="ratingUp"></button>
+                <button class="ratingUp" ng-click="rateUp(reddit)"></button>
                 <div class="ratingValue" ng-bind="reddit.rating"></div>
-                <button class="ratingDown"></button>
+                <button class="ratingDown" ng-click="rateDown(reddit)"></button>
             </div>
             <h1 reddittitle reddit="reddit"></h1>
             <div class="details">{{reddit.profile}} {{reddit.date}}</div>

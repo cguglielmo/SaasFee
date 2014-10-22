@@ -31,7 +31,7 @@
     </header>
 
     <div id="content">
-        <button id="newRedditButton"></button>
+        <div ng-controller="NewRedditCtrl" ng-include src="url"></div>
 
         <div ng-view=""></div>
     </div>
@@ -72,6 +72,7 @@
         <script src="scripts/controllers/reddits.js"></script>
         <script src="scripts/controllers/newReddit.js"></script>
         <script src="scripts/script.js"></script>
+        <script src="scripts/services/repository.js"></script>
         <!-- endbuild -->
 </body>
 </html>

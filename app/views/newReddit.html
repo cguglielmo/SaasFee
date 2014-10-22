@@ -1,8 +1,10 @@
-<div id="newRedditBox" style="display:none">
-    <input type="text" id="titleField" placeholder="Title"><br>
-    <input type="text" id="linkField" placeholder="Link"><br>
-    <textarea id="textField" placeholder="Text"></textarea>
+<button id="newRedditButton" ng-click="toggleNewRedditBox()"  ng-class="creatingNewReddit ? '' : 'newRedditBoxHidden'">{{ creatingNewReddit && 'Abbrechen' || 'Neuer Reddit erfassen' }}</button>
+
+<div id="newRedditBox" ng-show="creatingNewReddit">
+    <input ng-model="reddit.title" type="text" id="titleField" placeholder="Title"><br>
+    <input ng-model="reddit.link" type="text" id="linkField" placeholder="Link"><br>
+    <textarea ng-model="reddit.text" id="textField" placeholder="Text"></textarea>
     <p>
-        <button id="redditSubmit">Erfassen</button>
+        <button ng-click="submit(reddit)" id="redditSubmit">Erfassen</button>
     </p>
 </div>
