@@ -1,6 +1,6 @@
 <div id="reddits" >
 
-    <article class="reddit" ng-repeat="reddit in reddits">
+    <article class="reddit" ng-repeat="reddit in reddits | orderBy:predicate:reverse">
         <div class="redditContent">
             <div class="rating">
                 <button class="ratingUp" ng-click="rateUp(reddit)"></button>

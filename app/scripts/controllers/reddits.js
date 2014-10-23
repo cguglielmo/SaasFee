@@ -1,8 +1,16 @@
 'use strict';
 
 angular.module('saasFeeApp')
-    .controller('RedditsCtrl', function ($scope, repository) {
+    .controller('RedditsCtrl', function ($scope, $routeParams, repository) {
         $scope.reddits = repository.getReddits();
+
+        if ($routeParams.category === 'newest') {
+            $scope.predicate = 'date';
+            $scope.reverse = true;
+        } else if ($routeParams.category === 'top') {
+            $scope.predicate = 'rating';
+            $scope.reverse = true;
+        }
 
         $scope.rateUp = rateUp;
         $scope.rateDown = rateDown;

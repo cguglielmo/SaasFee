@@ -120,7 +120,7 @@ angular.module('saasFeeApp')
                 text: '',
                 date: new Date(),
                 author: currentUser,
-                rating: 15000,
+                rating: 1235,
                 commentCount: 3
             };
             initSampleEntry(reddit);

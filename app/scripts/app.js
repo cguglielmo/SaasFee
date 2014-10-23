@@ -11,7 +11,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/reddits/:category', {
         templateUrl: 'views/reddits.html',
         controller: 'RedditsCtrl',
         resolve: { 'reddits': ['repository', function (repository) {
@@ -24,6 +24,6 @@ angular
         controller: 'NewRedditCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/reddits/newest'
       });
   });
