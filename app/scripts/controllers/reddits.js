@@ -6,6 +6,9 @@ angular.module('saasFeeApp')
 
         $scope.rateUp = rateUp;
         $scope.rateDown = rateDown;
+        $scope.toggleComments = toggleComments;
+        $scope.commentRateUp = commentRateUp;
+        $scope.commentRateDown = commentRateDown;
 
         function rateUp(reddit) {
           reddit.rating++;
@@ -13,6 +16,19 @@ angular.module('saasFeeApp')
 
         function rateDown(reddit) {
           reddit.rating--;
+        }
+
+        function commentRateUp(comment) {
+            comment.rating++;
+        }
+
+        function commentRateDown(comment) {
+            comment.rating--;
+        }
+
+        function toggleComments(reddit) {
+          repository.getComments(reddit);
+          reddit.displayingComments = !reddit.displayingComments;
         }
     })
     .directive('reddittitle', function($compile) {

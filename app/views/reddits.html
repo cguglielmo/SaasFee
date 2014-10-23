@@ -11,17 +11,30 @@
             <div class="details">{{reddit.profile}} {{reddit.date}}</div>
             <p redditcontent reddit="reddit"></p>
             <div class="actionBar">
-                <button class="newComment"><span>Kommentare</span><span class="commentCount" ng-bind="reddit.commentCount"></span></button>
+                <button class="newComment" ng-click="toggleComments(reddit)"><span>{{ reddit.displayingComments && 'Ausblenden' || 'Kommentare' }}</span><span class="commentCount" ng-bind="reddit.commentCount"></span></button>
                 <button class="share"><span>Teilen</span></button>
                 <button class="more"><span>Mehr</span></button>
             </div>
         </div>
-        <div class="comments" style="display:none">
-            <div class="newCommentBox">
-                <textarea class="commentField" placeholder="Kommentar erfassen"></textarea><br>
+        <div class="comments" ng-show="reddit.displayingComments">
+            <div class="newCommentBox" ng-controller="NewCommentCtrl">
+                <textarea class="commentField" placeholder="Kommentar erfassen" ng-model="comment.text"></textarea><br>
                 <p>
-                    <button class="commentSubmit">Erfassen</button>
+                    <button class="commentSubmit" ng-click="submit(reddit, comment)">Erfassen</button>
                 </p>
+            </div>
+
+            <div class="comment" ng-repeat="comment in reddit.comments">
+                <div class="commentDetails"><a ng-href="profile/{{comment.author}}" ng-bind="comment.author"></a> <span ng-bind="comment.date"></span></div>
+                <p ng-bind="comment.text"></p>
+                <div class="commentActionBar">
+                    <div class="commentRating">
+                        <button class="ratingUp" ng-click="commentRateUp(comment)"></button>
+                        <div class="ratingValue" ng-bind="comment.rating"></div>
+                        <button class="ratingDown" ng-click="commentRateDown(comment)"></button>
+                    </div>
+                </div>
+                <div class="hr" ng-show="!$last"></div>
             </div>
         </div>
         <div class="hr"></div>

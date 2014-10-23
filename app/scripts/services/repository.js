@@ -5,6 +5,13 @@ angular.module('saasFeeApp')
 
         var reddits;
         var currentUser = 'anonymous';
+        var textLoremIpsum = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
+            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
+            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
+            sit amet.';
 
         function parseLink(link) {
             var url = {}, index, indexSlash;
@@ -51,14 +58,7 @@ angular.module('saasFeeApp')
 
         /* temporary stuff (will be removed as soon as the reddit data is stored permanently) */
         function initSampleEntries() {
-            var reddit, comments;
-            var textLoremIpsum = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-            sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor\
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo\
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor\
-            sit amet.';
+            var reddit;
 
 
             var ajaxRequest;
@@ -99,21 +99,7 @@ angular.module('saasFeeApp')
                 rating: 1234,
                 commentCount: 2
             };
-            comments = [
-                {
-                    text: textLoremIpsum,
-                    date: new Date(),
-                    author: currentUser,
-                    rating: 15
-                },
-                {
-                    text: 'Bla bla bla',
-                    date: new Date(),
-                    author: currentUser,
-                    rating: 1
-                }
-            ];
-            initSampleEntry(reddit, comments);
+            initSampleEntry(reddit);
 
             // sample video entry
             reddit = {
@@ -125,15 +111,7 @@ angular.module('saasFeeApp')
                 rating: 1234,
                 commentCount: 1
             };
-            comments = [
-                {
-                    text: textLoremIpsum,
-                    date: new Date(),
-                    author: currentUser,
-                    rating: 15
-                }
-            ];
-            initSampleEntry(reddit, comments);
+            initSampleEntry(reddit);
 
             // sample image entry
             reddit = {
@@ -145,7 +123,11 @@ angular.module('saasFeeApp')
                 rating: 15000,
                 commentCount: 3
             };
-            comments = [
+            initSampleEntry(reddit);
+        }
+
+        function initSampleComments() {
+            return [
                 {
                     text: textLoremIpsum,
                     date: new Date(),
@@ -165,10 +147,9 @@ angular.module('saasFeeApp')
                     rating: 15
                 }
             ];
-            initSampleEntry(reddit, comments);
         }
 
-        function initSampleEntry(reddit, comments) {
+        function initSampleEntry(reddit) {
             /*var link, url;
              var content = '', title = '';
              if (reddit.link) {
@@ -214,9 +195,27 @@ angular.module('saasFeeApp')
             reddits.unshift(reddit);
         };
 
+        var getComments = function(reddit) {
+            if(!reddit.comments) {
+                reddit.comments = initSampleComments();
+                /*$http.get('/scripts/data/search.json').then(function (data) {
+                 reddits = data.data;
+                 deferred.resolve(reddits);
+                 });*/
+            }
+            return reddit.comments;
+        };
+
+        var addComment = function(reddit, comment) {
+            reddit.commentCount++;
+            reddit.comments.unshift(comment);
+        };
+
         return {
             getReddits: getReddits,
             loadReddits: loadReddits,
-            addReddit: addReddit
+            addReddit: addReddit,
+            getComments: getComments,
+            addComment: addComment
         };
     });
