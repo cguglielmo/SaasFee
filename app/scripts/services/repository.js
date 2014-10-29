@@ -61,7 +61,7 @@ angular.module('saasFeeApp')
             var reddit;
 
 
-            var ajaxRequest;
+            /*var ajaxRequest;
             var redditsHandler;
             var commentsHandler;
 
@@ -87,7 +87,7 @@ angular.module('saasFeeApp')
                 };
                 ajaxRequest('/data/reddits/' + 1 + '/comments', commentsHandler);
             };
-            ajaxRequest('/data/reddits', redditsHandler);
+            ajaxRequest('/data/reddits', redditsHandler);*/
 
             // sample text entry
             reddit = {
@@ -150,19 +150,6 @@ angular.module('saasFeeApp')
         }
 
         function initSampleEntry(reddit) {
-            /*var link, url;
-             var content = '', title = '';
-             if (reddit.link) {
-             link = reddit.link;
-             //url = parseLink(link);
-
-             //reddit.title = '<a href="' + url.fullUrl + '">' + reddit.title + '</a>';
-             reddit.content = createContent(url);
-             }
-             else {
-             //reddit.title = reddit.title;
-             reddit.content = nl2br(reddit.text);
-             }*/
             addReddit(reddit);
         }
 
@@ -172,12 +159,26 @@ angular.module('saasFeeApp')
 
             if(!reddits) {
                 reddits = [];
-                initSampleEntries();
-                deferred.resolve(reddits);
+                /*initSampleEntries();
+                deferred.resolve(reddits);*/
                 /*$http.get('/scripts/data/search.json').then(function (data) {
                     reddits = data.data;
                     deferred.resolve(reddits);
                 });*/
+
+                $http.get('/data/reddits').
+                    success(function (data, status) {
+                        console.log('request succeeded');
+                        for (var redditId in data) {
+                            if (data.hasOwnProperty(redditId)) {
+                                addReddit(data[redditId]);
+                            }
+                        }
+                        deferred.resolve(reddits);
+                    }).
+                    error(function(data, status) {
+                        console.log('request errored: ' + status + ' / ' + data);
+                    });
             } else {
                 deferred.resolve(reddits);
             }

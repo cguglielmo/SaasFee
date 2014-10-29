@@ -7,5 +7,23 @@
         "author": "cgu",
         "rating": 1234,
         "commentCount": 2
+    },
+    "1": {
+        "title": "Link zu Video",
+        "link": "//www.youtube.com/embed/C-y70ZOSzE0",
+        "text": "",
+        "date": "15.09.2014",
+        "author": "bko",
+        "rating": 1230,
+        "commentCount": 2
+    },
+    "2": {
+        "title": "Link zu Bild",
+        "link": "http://www.ticketcorner.ch/obj/media/CH-eventim/galery/222x222/s/sfv-tickets.gif",
+        "text": "",
+        "date": "20.10.2014",
+        "author": "cgu",
+        "rating": 13433,
+        "commentCount": 1
     }
 }
