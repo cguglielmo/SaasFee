@@ -2,14 +2,14 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 
-var data = require('./routes/data');
+var data = require('./server/routes/data');
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'app')));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/data', data);
 

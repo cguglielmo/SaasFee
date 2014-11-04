@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var rootPath = path.resolve(process.cwd(), '..');
-var db = require('../source/data/database');
+var db = require('../data/database');
 
 /* GET data listing. */
 router

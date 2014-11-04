@@ -1,5 +1,5 @@
 {
-  "name": "saas-fee",
+  "name": "SaasFee",
   "version": "0.0.1",
   "dependencies": {
     "express": "~4.2.0",
