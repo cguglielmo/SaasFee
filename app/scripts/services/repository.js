@@ -13,6 +13,22 @@ angular.module('saasFeeApp')
                 error(function(data, status) {
                     console.log('request errored: ' + status + ' / ' + data);
                 });
+        };
+        var addData = function(url, data, success) {
+            $http.post(url, data).
+                success(function (data, status) {
+                    console.log('request succeeded');
+                    success(data, status);
+                }).
+                error(function(data, status) {
+                    console.log('request errored: ' + status + ' / ' + data);
+                });
+        };
+
+        function prepareReddit(reddit) {
+            if (reddit.link && !reddit.url) {
+                reddit.url = util.parseLink(reddit.link);
+            }
         }
 
         var loadReddits = function() {
@@ -23,8 +39,9 @@ angular.module('saasFeeApp')
                 loadData('/data/reddits', function (data, status) {
                     var reddit;
                     for (var i in data) {
-                            reddit = data[i];
-                            addReddit(reddit);
+                        reddit = data[i];
+                        prepareReddit(reddit);
+                        reddits.unshift(reddit);
                     }
                     deferred.resolve(reddits);
                 });
@@ -39,10 +56,11 @@ angular.module('saasFeeApp')
         };
 
         var addReddit = function(reddit) {
-            if (reddit.link) {
-                reddit.url = util.parseLink(reddit.link);
-            }
+            prepareReddit(reddit);
             reddits.unshift(reddit);
+            addData('/data/reddits', reddit, function(redditId, status) {
+                reddit._id = redditId;
+            });
         };
 
         var getComments = function(reddit) {
@@ -66,6 +84,9 @@ angular.module('saasFeeApp')
         var addComment = function(reddit, comment) {
             reddit.commentCount++;
             reddit.comments.unshift(comment);
+            addData('/data/reddits/' + reddit._id + '/comments', comment, function(commentId, status) {
+                comment._id = commentId;
+            });
         };
 
         return {
