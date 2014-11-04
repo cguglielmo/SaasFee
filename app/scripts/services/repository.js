@@ -22,12 +22,9 @@ angular.module('saasFeeApp')
                 reddits = [];
                 loadData('/data/reddits', function (data, status) {
                     var reddit;
-                    for (var redditId in data) {
-                        if (data.hasOwnProperty(redditId)) {
-                            reddit = data[redditId];
-                            reddit.id = redditId;
+                    for (var i in data) {
+                            reddit = data[i];
                             addReddit(reddit);
-                        }
                     }
                     deferred.resolve(reddits);
                 });
@@ -51,7 +48,7 @@ angular.module('saasFeeApp')
         var getComments = function(reddit) {
             if(!reddit.comments) {
                 reddit.comments = [];
-                loadData('/data/reddits/' + reddit.id + '/comments', function(data, status) {
+                loadData('/data/reddits/' + reddit._id + '/comments', function(data, status) {
                     var comment;
                     for (var commentId in data) {
                         if (data.hasOwnProperty(commentId)) {
