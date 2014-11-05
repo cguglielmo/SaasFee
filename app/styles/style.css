@@ -137,7 +137,36 @@ input, textarea {
     margin-bottom: 2px;
 }
 
-#reddits {
+#blankSlate {
+    text-align: center;
+    margin: 80px 0 120px 0;
+}
+
+#blankSlateArrow {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 170px;
+    position: absolute;
+    right: 70px;
+    width: 28%;
+    top: 0;
+    border-bottom-right-radius: 100%;
+}
+
+#blankSlateArrow:before {
+    content: "";
+    position: absolute;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    transform: rotate(-45deg);
+    height: 20px;
+    width: 20px;
+    right: -11px;
+    top: -4px;
+    transition: all 1s;
+}
+
+ #reddits {
     position: relative;
     float: left;
     width: 100%;
@@ -281,7 +310,20 @@ input, textarea {
     padding: 0px 5px;
 }
 
+@media (max-width: 600px) {
+
+    #blankSlateArrow {
+        width: 20%;
+    }
+
+}
+
 @media (max-width: 500px) {
+
+    #blankSlateArrow {
+        width: 10%;
+    }
+
     #newRedditBox,
     .redditContent,
     .comments {
@@ -321,4 +363,13 @@ input, textarea {
         margin-left: 50px;
         width: calc(100% - 100px);
     }
+}
+
+
+@media (max-width: 400px) {
+
+    #blankSlateArrow {
+        height: 60px;
+    }
+
 }

@@ -1,5 +1,8 @@
 <div id="reddits" >
-
+    <div id="blankSlate" ng-if="reddits.length == 0">
+      <img src="../images/blank_slate.png">
+      <div id="blankSlateArrow"></div>
+    </div>
     <article class="reddit" ng-repeat="reddit in reddits | orderBy:predicate:reverse">
         <div class="redditContent">
             <div class="rating">
