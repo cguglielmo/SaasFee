@@ -1,6 +1,10 @@
 {
   "name": "SaasFee",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "authors": [
+    "Bruno <bruno.koeferli@hsr.ch>",
+    "Claudio <claudio.guglielmo@hsr.ch>"
+  ],
   "dependencies": {
     "angular": "~1.2.0",
     "json3": "~3.3.1",
