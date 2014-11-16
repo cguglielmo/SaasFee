@@ -46,7 +46,15 @@ angular.module('saasFeeApp')
             return link.substr(extensionIndex + 1);
         }
 
+        function nl2br(s) {
+            if (!s) {
+                return '';
+            }
+            return s.replace(/\n/g, '<br>');
+        }
+
         return {
-            parseLink: parseLink
+            parseLink: parseLink,
+            nl2br: nl2br
         };
     });

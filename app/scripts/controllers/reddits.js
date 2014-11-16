@@ -61,11 +61,7 @@ angular.module('saasFeeApp')
             }
         };
     })
-    .directive('redditcontent', function($compile) {
-
-        function nl2br(s) {
-            return s.replace(/\n/g, '<br>');
-        }
+    .directive('redditcontent', function($compile, util) {
 
         function createContent(url) {
             var image, src, path, iframe;
@@ -118,7 +114,7 @@ angular.module('saasFeeApp')
             if (reddit.link) {
                 return createContent(reddit.url);
             }
-            return nl2br(reddit.text);
+            return util.nl2br(reddit.text);
         };
 
         var linker = function(scope, element, attrs) {
