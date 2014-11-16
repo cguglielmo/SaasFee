@@ -19,9 +19,13 @@ angular
         }]
         }
       })
-      .when('/about', {
-        templateUrl: '../views/newReddit.html',
-        controller: 'NewRedditCtrl'
+      .when('/login', {
+        templateUrl: '../views/login.html',
+        controller: 'LoginCtrl'
+      })
+      .when('/register', {
+        templateUrl: '../views/register.html',
+        controller: 'RegisterUserCtrl'
       })
       .otherwise({
         redirectTo: '/reddits/newest'

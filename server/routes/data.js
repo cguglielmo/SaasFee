@@ -6,6 +6,24 @@ var db = require('../data/database');
 
 /* GET data listing. */
 router
+    .post('/users', function(req, res) {
+        var user = req.body;
+        db.users.findOne({email: user.email}, function (err, userFound) {
+            if (userFound) {
+                var errors = []
+                errors.push({
+                    field: "email",
+                    message: "Diese E-Mail wurde bereits registriert",
+                    validationErrorKey: "emailAlreadyRegistered"
+                });
+              res.send({errors: errors});
+            } else {
+                db.users.insert(user, function (err, user) {
+                    res.send(user._id);
+                });
+            }
+        });
+    })
     .get('/reddits', function(req, res) {
         db.reddits.find({}, function (err, reddits) {
            res.send(reddits);

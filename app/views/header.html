@@ -1,0 +1,13 @@
+<button dropdown id="smartCategoryChooser">Beliebt</button>
+<div id="smartCategoryBox" class="dropdown-box" style="display:none">
+    <a href="#reddits/newest"><div>Neu</div></a>
+    <a href="#reddits/top"><div>Top</div></a>
+</div>
+<button dropdown id="admin"><img src="images/user.png"></button>
+<div id="adminBox" class="dropdown-box right" style="display:none">
+    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail"><br>
+    <input ng-model="user.password" type="password" id="userPassword" placeholder="Password"><br>
+    <button class="loginButton" ng-click="login(user)" id="loginButton">Login</button>
+    <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p>
+</div>
+<div id="title">SaasFee</div>

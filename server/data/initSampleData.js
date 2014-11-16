@@ -1,5 +1,20 @@
 var db = require('./database');
 
+
+db.users.insert({
+    "name": "Guglielmo",
+    "prename": "Claudio",
+    "email": "claudio.guglielmo@hsr.ch",
+    "password": "cgu1234"
+});
+
+db.users.insert({
+    "name": "Köferli",
+    "prename": "Bruno",
+    "email": "bruno.köferli@hsr.ch",
+    "password": "bko1234"
+});
+
 db.reddits.insert({
     "title": "Text-Only-Beitrag",
     "link": "",

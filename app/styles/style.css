@@ -25,7 +25,11 @@ h1 {
     float: left;
 }
 
-header {
+input.ng-invalid-email-already-registered {
+    background-color: #FFE0E0;
+}
+
+.header {
     box-sizing: border-box;
     width: 100%;
     border-bottom: 1px solid #777777;
@@ -43,26 +47,19 @@ header {
 }
 
 /* generate block formatting context */
-header:after {
+.header:after {
     clear: both;
     content: "";
     display: block;
 }
 
-header button {
+.header button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-#smartCategoryChooser {
-    padding: 5px;
-    margin: 15px 0px;
-    float: left;
-    font-size: 14px;
-}
-
-#smartCategoryBox {
+.dropdown-box {
     position:absolute;
     border: 1px solid #777777;
     margin-left: -1px;
@@ -70,6 +67,13 @@ header button {
     padding: 0px;
     background-color: white;
     box-shadow: 2px 2px 2px #ccc;
+}
+
+#smartCategoryChooser {
+    padding: 5px;
+    margin: 15px 0px;
+    float: left;
+    font-size: 14px;
 }
 
 #smartCategoryBox div {
@@ -80,6 +84,7 @@ header button {
 #smartCategoryBox div:hover {
     background-color: #eeeeee;
 }
+
 #admin {
     float: right;
     margin-top: 8px;
@@ -88,6 +93,22 @@ header button {
 
 #admin > img {
     height: 40px;
+}
+
+#adminBox {
+    padding: 5px;
+}
+
+#adminBox .loginButton {
+    color: white;
+    background-color: green;
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+#adminBox .notRegisteredYet {
+    margin-bottom: 0;
 }
 
 #content {

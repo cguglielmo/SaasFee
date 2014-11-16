@@ -89,11 +89,23 @@ angular.module('saasFeeApp')
             });
         };
 
+        var registerUser = function(user, success, error) {
+            addData('/data/users', user, function(response, status) {
+                if (response.errors) {
+                    error(response.errors);
+                }else {
+                    user._id = response;
+                    success(user);
+                }
+            });
+        };
+
         return {
             getReddits: getReddits,
             loadReddits: loadReddits,
             addReddit: addReddit,
             getComments: getComments,
-            addComment: addComment
+            addComment: addComment,
+            registerUser: registerUser
         };
     });

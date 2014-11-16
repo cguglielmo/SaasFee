@@ -19,19 +19,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header>
-        <button id="smartCategoryChooser"></button>
-        <div id="smartCategoryBox" style="display:none">
-            <a href="#reddits/newest"><div>Neu</div></a>
-            <a href="#reddits/top"><div>Top</div></a>
-        </div>
-        <button id="admin"><img src="images/user.png"></button>
-        <div id="title">SaasFee</div>
+    <header ng-controller="HeaderCtrl">
+        <div class="header" ng-include src="'views/header.html'"></div>
     </header>
 
     <div id="content">
-        <div ng-controller="NewRedditCtrl" ng-include src="url"></div>
-
         <div ng-view=""></div>
     </div>
 
@@ -71,9 +63,13 @@
     <script src="scripts/controllers/reddits.js"></script>
     <script src="scripts/controllers/newReddit.js"></script>
     <script src="scripts/controllers/newComment.js"></script>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/registerUser.js"></script>
+    <script src="scripts/controllers/header.js"></script>
     <script src="scripts/services/util.js"></script>
     <script src="scripts/services/repository.js"></script>
+    <script src="scripts/services/header.js"></script>
+    <script src="scripts/script.js"></script>
     <!-- endbuild -->
 </body>
 </html>
