@@ -3,11 +3,22 @@
     <a href="#reddits/newest"><div>Neu</div></a>
     <a href="#reddits/top"><div>Top</div></a>
 </div>
-<button dropdown id="admin"><img src="images/user.png"></button>
-<div id="adminBox" class="dropdown-box right" style="display:none">
-    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail"><br>
-    <input ng-model="user.password" type="password" id="userPassword" placeholder="Password"><br>
-    <button class="loginButton" ng-click="login(user)" id="loginButton">Login</button>
-    <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p>
+
+<button dropdown id="login" ng-show="!currentUser">Anmelden</button>
+<div id="loginBox" class="dropdown-box right" style="display:none">
+    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" ng-click="$event.stopPropagation()"><br>
+    <input ng-model="user.password" type="password" id="userPassword" placeholder="Password" ng-click="$event.stopPropagation()"><br>
+    <button class="loginButton" ng-click="login(user);" id="loginButton">Login</button>
+    <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p></a>
 </div>
+
+<button dropdown id="profile" ng-show="currentUser"><img src="images/user.png"></button>
+<div id="profileBox" class="dropdown-box right" style="display:none">
+    <p>
+        <b>{{currentUser.prename}} {{currentUser.name}}</b><br/>
+        {{currentUser.email}}
+    </p>
+    <button class="logoutButton" ng-click="logout()" id="logoutButton">Logout</button>
+</div>
+
 <div id="title">SaasFee</div>

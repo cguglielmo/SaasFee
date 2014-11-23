@@ -1,8 +1,9 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-
 var data = require('./server/routes/data');
+var auth = require('./server/routes/auth');
+var jwt = require('jsonwebtoken');
 
 var app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'app')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
+app.use('/auth', auth);
 app.use('/data', data);
 
 /// catch 404 and forward to error handler

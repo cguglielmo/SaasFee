@@ -69,11 +69,15 @@ input.ng-invalid-email-already-registered {
     box-shadow: 2px 2px 2px #ccc;
 }
 
-#smartCategoryChooser {
+#smartCategoryChooser,
+#login {
     padding: 5px;
     margin: 15px 0px;
-    float: left;
     font-size: 14px;
+}
+
+#smartCategoryChooser {
+    float: left;
 }
 
 #smartCategoryBox div {
@@ -85,21 +89,31 @@ input.ng-invalid-email-already-registered {
     background-color: #eeeeee;
 }
 
-#admin {
+#login,
+#profile {
     float: right;
+}
+
+#profile {
     margin-top: 8px;
     padding: 0px;
 }
 
-#admin > img {
+#profile > img {
     height: 40px;
 }
 
-#adminBox {
-    padding: 5px;
+#loginBox,
+#profileBox {
+    padding: 10px;
 }
 
-#adminBox .loginButton {
+#profileBox p {
+    margin-top: 0px;
+}
+
+#loginBox .loginButton,
+#profileBox .logoutButton{
     color: white;
     background-color: green;
     width: 100%;
@@ -107,7 +121,7 @@ input.ng-invalid-email-already-registered {
     margin-top: 5px;
 }
 
-#adminBox .notRegisteredYet {
+#loginBox .notRegisteredYet {
     margin-bottom: 0;
 }
 

@@ -1,34 +1,56 @@
 'use strict';
 
 angular.module('saasFeeApp')
-  .controller('HeaderCtrl', function ($scope) {
+  .controller('HeaderCtrl', function ($scope, auth) {
+        $scope.login = login;
+        $scope.logout = auth.logout;
+
+        $scope.$watch(auth.getCurrentUser, function(currentUser) {
+            $scope.currentUser = currentUser;
+        });
+
+        function login(userIn) {
+           var user = angular.copy(userIn);
+
+           auth.login({email: user.email, password: user.password});
+
+           // reset form
+           angular.copy({}, userIn);
+        }
+
   })
-.directive("dropdown", function() {
+.directive("dropdown", function($document) {
         return {
             restrict: "A",
+            scope: {
+                dropdownOpen: '&'
+            },
             link: function (scope, elem, attrs) {
                 var $button = jQuery(elem);
                 var $dropDownBox = $button.next('.dropdown-box');
 
-                $button.on('click', toggleDropDown);
+                $button.bind('click', toggleDropDown);
 
-                function onCloseBox(event) {
+                scope.$on('$locationChangeSuccess', function() {
                     hideDropDown();
-                }
+                });
 
                 function toggleDropDown() {
                     if ($dropDownBox.css('display') === 'none') {
-                        showDropDown($dropDownBox);
+                        showDropDown();
                     } else {
-                        hideDropDown($dropDownBox);
+                        hideDropDown();
                     }
                 }
 
-                function hideDropDown($dropDownBox) {
+                function hideDropDown() {
+                    $document.unbind('click');
                     $dropDownBox.hide();
                 }
 
-                function showDropDown($dropDownBox) {
+                function showDropDown() {
+                    $document.bind('click', onDocumentClikc);
+
                     var offset = $button.position();
                     var buttonRight;
 
@@ -41,6 +63,14 @@ angular.module('saasFeeApp')
                     }
 
                     $dropDownBox.show();
+                }
+
+                function onDocumentClikc(event) {
+                    //Don't close if button has been clicked. This will be handled by toggleDropDown handler
+                    if ($button[0].contains(event.target) ) {
+                        return;
+                    }
+                    hideDropDown();
                 }
             }
         };

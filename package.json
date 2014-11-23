@@ -2,11 +2,13 @@
   "name": "SaasFee",
   "version": "0.0.1",
   "dependencies": {
-    "express": "~4.2.0",
-    "morgan": "~1.0.0",
+    "body-parser": "~1.0.1",
     "debug": "~0.7.4",
-    "nedb": "~0.11.1",
-    "body-parser": "~1.0.1"
+    "express": "~4.2.0",
+    "express-jwt": "^0.5.0",
+    "jsonwebtoken": "^1.1.2",
+    "morgan": "~1.0.0",
+    "nedb": "~0.11.1"
   },
   "devDependencies": {
     "karma": "~0.12",

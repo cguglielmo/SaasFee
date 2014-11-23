@@ -3,6 +3,8 @@ var router = express.Router();
 var path = require('path');
 var rootPath = path.resolve(process.cwd(), '..');
 var db = require('../data/database');
+var expressJwt = require('express-jwt');
+var auth = require('./auth');
 
 /* GET data listing. */
 router
@@ -29,7 +31,7 @@ router
            res.send(reddits);
         });
     })
-    .post('/reddits', function(req, res) {
+    .post('/reddits', expressJwt({secret: auth.secret}), function(req, res) {
         db.reddits.insert(req.body, function (err, reddit) {
             res.send(reddit._id);
         });
@@ -39,7 +41,7 @@ router
             res.send(comments);
         });
     })
-    .post('/reddits/:reddit_id/comments', function(req, res) {
+    .post('/reddits/:reddit_id/comments', expressJwt({secret: auth.secret}), function(req, res) {
         var reqComment = req.body;
         var redditId = req.params.reddit_id;
         reqComment.redditId = redditId;
