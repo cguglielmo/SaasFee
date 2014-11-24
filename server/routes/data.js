@@ -36,6 +36,11 @@ router
             res.send(reddit._id);
         });
     })
+    .get('/reddits/:reddit_id', function(req, res) {
+        db.reddits.findOne({_id: req.params.reddit_id}, function (err, reddit) {
+            res.send(reddit);
+        });
+    })
     .get('/reddits/:reddit_id/comments', function(req, res) {
         db.comments.find({redditId: req.params.reddit_id}, function (err, comments) {
             res.send(comments);

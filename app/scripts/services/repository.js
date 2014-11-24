@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('saasFeeApp')
-    .factory('repository', function ($http, $q, util) {
+    .factory('repository', function ($http, $q, socket, util) {
         var reddits;
 
+        // TODO: umbenennen: "get"
         var loadData = function(url, success) {
             $http.get(url).
                 success(function (data, status) {
@@ -14,6 +15,7 @@ angular.module('saasFeeApp')
                     console.log('request errored: ' + status + ' / ' + data);
                 });
         };
+        // TODO: umbenennen: "post"
         var addData = function(url, data, success) {
             $http.post(url, data).
                 success(function (data, status) {
@@ -60,6 +62,7 @@ angular.module('saasFeeApp')
             reddits.unshift(reddit);
             addData('/data/reddits', reddit, function(redditId, status) {
                 reddit._id = redditId;
+                socket.emit('reddit:new', { redditId: redditId });
             });
         };
 
@@ -99,6 +102,15 @@ angular.module('saasFeeApp')
                 }
             });
         };
+
+        socket.on('reddit:new', function (data) {
+            console.log('reddit:new ' + data);
+            loadData('/data/reddits/' + data.redditId, function (reddit, status) {
+                prepareReddit(reddit);
+                reddits.unshift(reddit);
+            });
+        });
+        // TODO: weitere socket.on --> comment:new, reddit:rating, comment:rating
 
         return {
             getReddits: getReddits,

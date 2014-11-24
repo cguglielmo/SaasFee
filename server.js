@@ -1,6 +1,9 @@
+var debug = require('debug')('reddit:server');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var socketIo = require('socket.io');
+
 var data = require('./server/routes/data');
 var auth = require('./server/routes/auth');
 var jwt = require('jsonwebtoken');
@@ -44,4 +47,13 @@ app.use(function(err, req, res, next) {
 
 */
 
-module.exports = app;
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+    debug('SassFee server listening on port ' + server.address().port);
+});
+
+var io = socketIo.listen(server);
+require('./server/routes/socket')(io);
+
+debug('Test');

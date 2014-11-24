@@ -27,8 +27,7 @@ angular.module('saasFeeApp')
     }
 
     function toggleNewRedditBox() {
-        $scope.creatingNewReddit = !$scope.creatingNewReddit;
+        $scope.creatingNewReddit = !$scope.creatingNewRedditcreatingNewReddit;
     }
-
 
   });
