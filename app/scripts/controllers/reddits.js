@@ -8,12 +8,12 @@ angular.module('saasFeeApp')
             $scope.predicate = 'date';
             $scope.reverse = true;
             $rootScope.$broadcast('categoryChange',
-                {category: $routeParams.category, categoryName: 'Neuste Reddits'});
+                {category: $routeParams.category, categoryName: 'Neuste'});
         } else if ($routeParams.category === 'top') {
             $scope.predicate = 'rating';
             $scope.reverse = true;
             $rootScope.$broadcast('categoryChange',
-                {category: $routeParams.category, categoryName: 'Top Reddits'});
+                {category: $routeParams.category, categoryName: 'Top'});
         }
 
         $scope.rateUp = rateUp;
