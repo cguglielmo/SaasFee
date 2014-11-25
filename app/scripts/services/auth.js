@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('saasFeeApp')
-    .factory('auth', function ($http, $window) {
+    .factory('auth', function ($http, $window, $location) {
         var currentUser = loadCurrentUserFromSessionStorage();
+        var errorMessage = 'Unbekannter Benutzername oder falsches Passwort.';
 
-        var login = function(user) {
+        var login = function(user, error) {
             $http.post('/auth', user)
-                .success(function (data, status, headers, config) {
+                .success(function (data) {
                     $window.sessionStorage.token = data.token;
                     currentUser = data.user;
                     persistUserInSessionStorage(currentUser);
 
-                    alert('Weclome');
+                    $location.path('/');
                 })
-                .error(function (data, status, headers, config) {
-
-                    alert('Unbekannter Benutzername oder falsches Passwort.');
+                .error(function () {
+                    error(errorMessage);
                 });
         };
 
@@ -26,6 +26,22 @@ angular.module('saasFeeApp')
 
         var getCurrentUser = function() {
            return currentUser;
+        }
+
+        var isLoggedIn = function() {
+            return !!currentUser;
+        }
+
+        var getErrorMessage = function() {
+            return errorMessage;
+        }
+
+        var redirectToLogin = function(loginFailed) {
+            if (loginFailed) {
+                $location.path('login').search('loginFailed');
+            } else {
+                $location.path('login');
+            }
         }
 
         var persistUserInSessionStorage = function(user) {
@@ -56,7 +72,10 @@ angular.module('saasFeeApp')
         return {
             login: login,
             logout: logout,
+            isLoggedIn: isLoggedIn,
+            redirectToLogin: redirectToLogin,
             getCurrentUser: getCurrentUser,
+            getErrorMessage: getErrorMessage,
             removeCurrentUserFromSessionStorage: removeCurrentUserFromSessionStorage
         };
     })

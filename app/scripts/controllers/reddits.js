@@ -1,15 +1,19 @@
 'use strict';
 
 angular.module('saasFeeApp')
-    .controller('RedditsCtrl', function ($scope, $routeParams, repository) {
+    .controller('RedditsCtrl', function ($scope, $rootScope, $routeParams, repository, auth) {
         $scope.reddits = repository.getReddits();
 
         if ($routeParams.category === 'newest') {
             $scope.predicate = 'date';
             $scope.reverse = true;
+            $rootScope.$broadcast('categoryChange',
+                {category: $routeParams.category, categoryName: 'Neuste Reddits'});
         } else if ($routeParams.category === 'top') {
             $scope.predicate = 'rating';
             $scope.reverse = true;
+            $rootScope.$broadcast('categoryChange',
+                {category: $routeParams.category, categoryName: 'Top Reddits'});
         }
 
         $scope.rateUp = rateUp;
@@ -35,8 +39,13 @@ angular.module('saasFeeApp')
         }
 
         function toggleComments(reddit) {
-          repository.getComments(reddit);
-          reddit.displayingComments = !reddit.displayingComments;
+            if (!auth.isLoggedIn()) {
+                auth.redirectToLogin();
+                return;
+            }
+
+            repository.getComments(reddit);
+            reddit.displayingComments = !reddit.displayingComments;
         }
     })
     .directive('reddittitle', function($compile) {

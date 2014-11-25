@@ -1,19 +1,19 @@
-<button dropdown id="smartCategoryChooser">Beliebt</button>
+<button dropdown id="smartCategoryChooser" class="headerButton" ng-bind="category"></button>
 <div id="smartCategoryBox" class="dropdown-box" style="display:none">
-    <a href="#reddits/newest"><div>Neu</div></a>
-    <a href="#reddits/top"><div>Top</div></a>
+    <button ng-click="changeCategory('newest')">Neuste Reddits</button>
+    <button ng-click="changeCategory('top')">Top Reddits</button>
 </div>
 
-<button dropdown id="login" ng-show="!currentUser">Anmelden</button>
-<div id="loginBox" class="dropdown-box right" style="display:none">
+<button dropdown id="login" class="headerButton" ng-show="!currentUser">Anmelden</button>
+<div id="loginDropdownBox" class="dropdown-box right" style="display:none">
     <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" ng-click="$event.stopPropagation()"><br>
     <input ng-model="user.password" type="password" id="userPassword" placeholder="Password" ng-click="$event.stopPropagation()"><br>
     <button class="loginButton" ng-click="login(user);" id="loginButton">Login</button>
     <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p></a>
 </div>
 
-<button dropdown id="profile" ng-show="currentUser"><img src="images/user.png"></button>
-<div id="profileBox" class="dropdown-box right" style="display:none">
+<button dropdown id="profile" class="headerButton" ng-show="currentUser"><img src="images/user.png"></button>
+<div id="profileDropdownBox" class="dropdown-box right" style="display:none">
     <p>
         <b>{{currentUser.prename}} {{currentUser.name}}</b><br/>
         {{currentUser.email}}

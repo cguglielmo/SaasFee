@@ -29,7 +29,7 @@ input.ng-invalid-email-already-registered {
     background-color: #FFE0E0;
 }
 
-.header {
+#header {
     box-sizing: border-box;
     width: 100%;
     border-bottom: 1px solid #777777;
@@ -47,13 +47,13 @@ input.ng-invalid-email-already-registered {
 }
 
 /* generate block formatting context */
-.header:after {
+#header:after {
     clear: both;
     content: "";
     display: block;
 }
 
-.header button {
+.headerButton {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -80,12 +80,17 @@ input.ng-invalid-email-already-registered {
     float: left;
 }
 
-#smartCategoryBox div {
+#smartCategoryBox button {
+    display: block;
+    background-color: transparent;
+    border: none;
     padding: 5px;
     color: black;
- }
+    width: 100%;
+    text-align: left;
+}
 
-#smartCategoryBox div:hover {
+#smartCategoryBox button:hover {
     background-color: #eeeeee;
 }
 
@@ -103,17 +108,18 @@ input.ng-invalid-email-already-registered {
     height: 40px;
 }
 
-#loginBox,
-#profileBox {
+#loginDropdownBox,
+#profileDropdownBox {
     padding: 10px;
 }
 
-#profileBox p {
+#profileDropdownBox p {
     margin-top: 0px;
 }
 
-#loginBox .loginButton,
-#profileBox .logoutButton{
+.loginButton,
+.logoutButton{
+    border: none;
     color: white;
     background-color: green;
     width: 100%;
@@ -121,8 +127,13 @@ input.ng-invalid-email-already-registered {
     margin-top: 5px;
 }
 
-#loginBox .notRegisteredYet {
+#loginDropdownBox .notRegisteredYet {
     margin-bottom: 0;
+}
+
+#loginBox {
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 #content {

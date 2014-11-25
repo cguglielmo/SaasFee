@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('saasFeeApp')
-    .factory('repository', function ($http, $q, socket, util) {
+    .factory('repository', function ($http, $q, socket, util, auth) {
         var reddits;
 
         // TODO: umbenennen: "get"
@@ -58,6 +58,11 @@ angular.module('saasFeeApp')
         };
 
         var addReddit = function(reddit) {
+            if (!auth.isLoggedIn()) {
+                auth.redirectToLogin();
+                return;
+            }
+
             prepareReddit(reddit);
             reddits.unshift(reddit);
             addData('/data/reddits', reddit, function(redditId, status) {
@@ -85,6 +90,11 @@ angular.module('saasFeeApp')
         };
 
         var addComment = function(reddit, comment) {
+            if (!auth.isLoggedIn()) {
+                auth.redirectToLogin();
+                return;
+            }
+
             reddit.commentCount++;
             reddit.comments.unshift(comment);
             addData('/data/reddits/' + reddit._id + '/comments', comment, function(commentId, status) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('saasFeeApp')
-  .controller('NewRedditCtrl', function ($scope, repository) {
+  .controller('NewRedditCtrl', function ($scope, repository, auth, $location) {
     var currentUser = 'bko';
     $scope.url = 'views/newReddit.html';
     $scope.submit = addReddit;
@@ -27,7 +27,11 @@ angular.module('saasFeeApp')
     }
 
     function toggleNewRedditBox() {
-        $scope.creatingNewReddit = !$scope.creatingNewRedditcreatingNewReddit;
+        if (!auth.isLoggedIn()) {
+            auth.redirectToLogin();
+            return;
+        }
+        $scope.creatingNewReddit = !$scope.creatingNewReddit;
     }
 
   });
