@@ -1,5 +1,6 @@
 <form name="form" id="registerUserForm" ng-hide="registrationSuccessful">
-    <h2>Neuer Benutzer registrieren</h2>
+    <h2>Hallo unbekannter Benutzer!</h2>
+    <p>Es sind nur ganz wenige Angaben nötig, um Mitglied bei SaasFee zu werden.</p>
     <input ng-model="user.name" type="text" name="userName" id="userNameField" placeholder="Name" required><br>
     <input ng-model="user.prename" type="text" name="prename" id="userPrenameField" placeholder="Prename" required><br>
     <input ng-model="user.email" type="email" name="email" id="userEmailField" placeholder="E-Mail" required><br>
@@ -12,10 +13,10 @@
     </p>
 </form>
 <div ng-show="registrationSuccessful">
-    <h2>Registrierung erfolgreich.</h2>
-    Herzlich Willkommen bei SaasFee, {{user.prename}} {{user.name}}!
+    <h2>Herzlich Willkommen bei SaasFee, {{user.prename}} {{user.name}}!</h2>
     <p>
     Du kannst dich jetzt <a href="#login">einloggen</a>.
+    <img class="registerImage" src="images/blank_slate.png">
     </p>
 </div>
 

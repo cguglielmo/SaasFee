@@ -136,6 +136,11 @@ input.ng-invalid-email-already-registered {
     margin: 0 auto;
 }
 
+.registerImage {
+    display: block;
+    margin: 25px auto;
+}
+
 #content {
     display: inline-block;
     position: relative;
