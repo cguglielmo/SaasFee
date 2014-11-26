@@ -2,8 +2,8 @@
 
 <div id="newRedditBox" ng-show="creatingNewReddit">
     <input ng-model="reddit.title" type="text" id="titleField" placeholder="Titel" required><br>
-    <input ng-model="reddit.link" type="text" id="linkField" placeholder="Link"><br>
-    <textarea ng-model="reddit.text" id="textField" placeholder="Text"></textarea>
+    <input ng-model="reddit.link" type="text" id="linkField" placeholder="Link (z.B. www.meine-webseite.ch/link)"><br>
+    <textarea ng-model="reddit.text" id="textField" placeholder="Hier kannst du einen Inhalt erfassen"></textarea>
     <p>
         <button class="formButton" ng-click="submit(reddit)" id="redditSubmit">Reddit hinzufügen</button>
     </p>
