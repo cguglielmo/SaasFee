@@ -11,7 +11,7 @@ angular.module('saasFeeApp')
         function addReddit(redditIn) {
             var reddit = angular.copy(redditIn);
 
-            reddit.date = new Date();
+            reddit.date = new Date().toJSON();
             reddit.author = currentUser;
             reddit.rating = 0;
             reddit.commentCount = 0;
