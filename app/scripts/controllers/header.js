@@ -1,26 +1,26 @@
-'use strict';
-
 angular.module('saasFeeApp')
-  .controller('HeaderCtrl', function ($scope, auth, $location) {
+    .controller('HeaderCtrl', function ($scope, auth, $location) {
+        'use strict';
+
         $scope.login = login;
         $scope.logout = auth.logout;
         $scope.changeCategory = changeCategory;
 
-        $scope.$watch(auth.getCurrentUser, function(currentUser) {
+        $scope.$watch(auth.getCurrentUser, function (currentUser) {
             $scope.currentUser = currentUser;
         });
 
-        $scope.$on('categoryChange', function(event ,message){
+        $scope.$on('categoryChange', function (event, message) {
             $scope.category = message.categoryName;
         });
 
         function login(userIn) {
-           var user = angular.copy(userIn);
+            var user = angular.copy(userIn);
 
-           auth.login({email: user.email, password: user.password}, error);
+            auth.login({email: user.email, password: user.password}, error);
 
-           // reset form
-           angular.copy({}, userIn);
+            // reset form
+            angular.copy({}, userIn);
         }
 
         function error(message) {
@@ -35,8 +35,10 @@ angular.module('saasFeeApp')
             }
         }
 
-  })
-.directive("dropdown", function($document) {
+    })
+    .directive("dropdown", function ($document) {
+        'use strict';
+
         return {
             restrict: "A",
             scope: {
@@ -48,7 +50,7 @@ angular.module('saasFeeApp')
 
                 $button.bind('click', toggleDropDown);
 
-                scope.$on('$locationChangeSuccess', function() {
+                scope.$on('$locationChangeSuccess', function () {
                     hideDropDown();
                 });
 
@@ -84,7 +86,7 @@ angular.module('saasFeeApp')
 
                 function onDocumentClick(event) {
                     //Don't close if button has been clicked. This will be handled by toggleDropDown handler
-                    if ($button[0].contains(event.target) ) {
+                    if ($button[0].contains(event.target)) {
                         return;
                     }
                     hideDropDown();

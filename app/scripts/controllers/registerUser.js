@@ -1,32 +1,32 @@
-'use strict';
-
 angular.module('saasFeeApp')
-  .controller('RegisterUserCtrl', function ($scope, repository) {
-    $scope.submit = registerUser;
-    $scope.registrationSuccessful = false;
-    $scope.errors = [];
+    .controller('RegisterUserCtrl', function ($scope, repository) {
+        'use strict';
 
-    function registerUser(userIn) {
-        var user = angular.copy(userIn);
+        $scope.submit = registerUser;
+        $scope.registrationSuccessful = false;
+        $scope.errors = [];
 
-        repository.registerUser(user, success, fail);
+        function registerUser(userIn) {
+            var user = angular.copy(userIn);
 
-        function success(user) {
-            $scope.registrationSuccessful = true;
-            $scope.user = user;
-        }
+            repository.registerUser(user, success, fail);
 
-        function fail(errors) {
-            var errorMsg = '';
-            var error;
-
-            for (var i=0; i < errors.length; i++) {
-              error = errors[i];
-              if (error.field) {
-                  $scope.form[error.field].$setValidity(error.validationErrorKey, false);
-              }
+            function success(user) {
+                $scope.registrationSuccessful = true;
+                $scope.user = user;
             }
-            $scope.errors = errors;
+
+            function fail(errors) {
+                var errorMsg = '';
+                var error;
+
+                for (var i = 0; i < errors.length; i++) {
+                    error = errors[i];
+                    if (error.field) {
+                        $scope.form[error.field].$setValidity(error.validationErrorKey, false);
+                    }
+                }
+                $scope.errors = errors;
+            }
         }
-    }
-});
+    });

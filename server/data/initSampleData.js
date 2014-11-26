@@ -1,6 +1,5 @@
 var db = require('./database');
 
-
 db.users.insert({
     "name": "Guglielmo",
     "prename": "Claudio",
@@ -23,7 +22,7 @@ db.reddits.insert({
     "author": "cgu",
     "rating": 1234,
     "commentCount": 2
-}, function(err, reddit) {
+}, function (err, reddit) {
     db.comments.insert({
         "redditId": reddit._id,
         "text": "Blab blalrledledle",
@@ -48,7 +47,7 @@ db.reddits.insert({
     "author": "bko",
     "rating": 1230,
     "commentCount": 2
-}, function(err, reddit) {
+}, function (err, reddit) {
     db.comments.insert({
         "redditId": reddit._id,
         "text": "Blab blalrledledle",
@@ -73,7 +72,7 @@ db.reddits.insert({
     "author": "cgu",
     "rating": 13433,
     "commentCount": 1
-}, function(err, reddit) {
+}, function (err, reddit) {
     db.comments.insert({
         "redditId": reddit._id,
         "text": "Blab blalrledledle",

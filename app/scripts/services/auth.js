@@ -1,11 +1,11 @@
-'use strict';
-
 angular.module('saasFeeApp')
     .factory('auth', function ($http, $window, $location) {
+        'use strict';
+
         var currentUser = loadCurrentUserFromSessionStorage();
         var errorMessage = 'Unbekannter Benutzername oder falsches Passwort.';
 
-        var login = function(user, error) {
+        var login = function (user, error) {
             $http.post('/auth', user)
                 .success(function (data) {
                     $window.sessionStorage.token = data.token;
@@ -19,36 +19,36 @@ angular.module('saasFeeApp')
                 });
         };
 
-        var logout = function(user) {
+        var logout = function (user) {
             currentUser = null;
             removeCurrentUserFromSessionStorage();
         };
 
-        var getCurrentUser = function() {
-           return currentUser;
-        }
+        var getCurrentUser = function () {
+            return currentUser;
+        };
 
-        var isLoggedIn = function() {
+        var isLoggedIn = function () {
             return !!currentUser;
-        }
+        };
 
-        var getErrorMessage = function() {
+        var getErrorMessage = function () {
             return errorMessage;
-        }
+        };
 
-        var redirectToLogin = function(loginFailed) {
+        var redirectToLogin = function (loginFailed) {
             if (loginFailed) {
                 $location.path('login').search('loginFailed');
             } else {
                 $location.path('login');
             }
-        }
+        };
 
-        var persistUserInSessionStorage = function(user) {
+        var persistUserInSessionStorage = function (user) {
             $window.sessionStorage.currentUserEmail = user.email;
             $window.sessionStorage.currentUserName = user.name;
             $window.sessionStorage.currentUserPrename = user.prename;
-        }
+        };
 
         function loadCurrentUserFromSessionStorage(user) {
             if (!$window.sessionStorage.currentUserEmail) {
@@ -62,12 +62,12 @@ angular.module('saasFeeApp')
             };
         }
 
-        var removeCurrentUserFromSessionStorage = function() {
+        var removeCurrentUserFromSessionStorage = function () {
             delete $window.sessionStorage.token;
             delete $window.sessionStorage.currentUserEmail;
             delete $window.sessionStorage.currentUserName;
             delete $window.sessionStorage.currentUserPrename;
-        }
+        };
 
         return {
             login: login,
@@ -81,6 +81,8 @@ angular.module('saasFeeApp')
     })
 
     .factory('authInterceptor', function ($rootScope, $q, $window) {
+        'use strict';
+
         return {
             request: function (config) {
                 config.headers = config.headers || {};
@@ -103,5 +105,7 @@ angular.module('saasFeeApp')
     })
 
     .config(function ($httpProvider) {
+        'use strict';
+
         $httpProvider.interceptors.push('authInterceptor');
     });

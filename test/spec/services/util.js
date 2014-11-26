@@ -1,24 +1,23 @@
 'use strict';
 
-describe('Service: util', function() {
+describe('Service: util', function () {
     var util;
 
     // load the service's module
     beforeEach(module('saasFeeApp'));
 
     // instantiate service
-    beforeEach(inject(function(_util_) {
-      util = _util_;
+    beforeEach(inject(function (_util_) {
+        util = _util_;
     }));
 
     it('should be instantiated', function () {
         expect(!!util).toBe(true);
     });
 
-    describe('method parseLink', function() {
-
+    describe('method parseLink', function () {
         var testParseLink = function (linkToTest, scheme, domain, path) {
-            it('should parse url: ' + linkToTest, function() {
+            it('should parse url: ' + linkToTest, function () {
                 var url = util.parseLink(linkToTest);
                 var expectedFullUrl = linkToTest;
                 console.log(expectedFullUrl.indexOf('://'));
@@ -49,13 +48,11 @@ describe('Service: util', function() {
         testParseLink('www.hsr.ch', 'http', 'www.hsr.ch', '');
         testParseLink('//www.youtube.com/embed/C-y70ZOSzE0', '//', 'www.youtube.com', 'embed/C-y70ZOSzE0');
         testParseLink('ftp://www.hsr.ch', 'http', 'www.hsr.ch', '');
-
     });
 
-    describe('method nl2br', function() {
-
+    describe('method nl2br', function () {
         var testNl2br = function (text, expectedText) {
-            it('should convert text: ' + text, function() {
+            it('should convert text: ' + text, function () {
                 var processedText = util.nl2br(text);
                 expect(processedText).toBe(expectedText);
             });
@@ -67,6 +64,5 @@ describe('Service: util', function() {
         testNl2br('\n', '<br>');
         testNl2br('', '');
         testNl2br(undefined, '');
-
     });
 });

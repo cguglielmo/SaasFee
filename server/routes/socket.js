@@ -1,5 +1,3 @@
-'use strict';
-
 var debug = require('debug')('reddit:socket');
 
 var socket = function (io) {

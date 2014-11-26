@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('saasFeeApp')
     .controller('RedditsCtrl', function ($scope, $rootScope, $routeParams, repository, auth) {
+        'use strict';
+
         $scope.reddits = repository.getReddits();
 
         if ($routeParams.category === 'newest') {
@@ -23,11 +23,11 @@ angular.module('saasFeeApp')
         $scope.commentRateDown = commentRateDown;
 
         function rateUp(reddit) {
-          reddit.rating++;
+            reddit.rating++;
         }
 
         function rateDown(reddit) {
-          reddit.rating--;
+            reddit.rating--;
         }
 
         function commentRateUp(comment) {
@@ -48,16 +48,17 @@ angular.module('saasFeeApp')
             reddit.displayingComments = !reddit.displayingComments;
         }
     })
-    .directive('reddittitle', function($compile) {
+    .directive('reddittitle', function ($compile) {
+        'use strict';
 
-        var getTemplate = function(reddit) {
+        var getTemplate = function (reddit) {
             if (reddit.link) {
                 return '<a href="' + reddit.url.fullUrl + '">' + reddit.title + '</a>';
             }
             return reddit.title;
         };
 
-        var linker = function(scope, element, attrs) {
+        var linker = function (scope, element, attrs) {
             element.html(getTemplate(scope.reddit)).show();
         };
 
@@ -66,11 +67,12 @@ angular.module('saasFeeApp')
             rep1ace: true,
             link: linker,
             scope: {
-                reddit:'=reddit'
+                reddit: '=reddit'
             }
         };
     })
-    .directive('redditcontent', function($compile, util) {
+    .directive('redditcontent', function ($compile, util) {
+        'use strict';
 
         function createContent(url) {
             var image, src, path, iframe;
@@ -119,14 +121,14 @@ angular.module('saasFeeApp')
             return false;
         }
 
-        var getTemplate = function(reddit) {
+        var getTemplate = function (reddit) {
             if (reddit.link) {
                 return createContent(reddit.url);
             }
             return util.nl2br(reddit.text);
         };
 
-        var linker = function(scope, element, attrs) {
+        var linker = function (scope, element, attrs) {
             element.html(getTemplate(scope.reddit)).show();
         };
 
@@ -135,7 +137,7 @@ angular.module('saasFeeApp')
             rep1ace: true,
             link: linker,
             scope: {
-                reddit:'=reddit'
+                reddit: '=reddit'
             }
         };
     });

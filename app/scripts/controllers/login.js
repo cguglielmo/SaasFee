@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('saasFeeApp')
-  .controller('LoginCtrl', function ($scope, auth, $location) {
+    .controller('LoginCtrl', function ($scope, auth, $location) {
+        'use strict';
+
         $scope.login = login;
         var loginFailed = $location.search().loginFailed;
         if (loginFailed) {
@@ -20,4 +20,4 @@ angular.module('saasFeeApp')
         function error(message) {
             $scope.error = message;
         }
-});
+    });

@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('saasFeeApp')
     .factory('util', function () {
+        'use strict';
+
 
         var parseLink = function parseLink(link) {
             var url = {}, index, indexSlash;
@@ -33,7 +33,7 @@ angular.module('saasFeeApp')
             url.extension = extractExtension(link);
             url.fullUrl = link;
             return url;
-        }
+        };
 
         function extractExtension(link) {
             var extensionIndex;

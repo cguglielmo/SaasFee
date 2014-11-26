@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('saasFeeApp')
     .factory('socket', function ($rootScope) {
+        'use strict';
+
         var socket = io.connect();
         return {
             on: function (eventName, callback) {

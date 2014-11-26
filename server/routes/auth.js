@@ -7,11 +7,11 @@ var secret = "VerySecureSecret_az342ckasfjio5128x";
 var jwt = require('jsonwebtoken');
 
 router
-    .post('/', function(req, res) {
+    .post('/', function (req, res) {
         var email = req.body.email;
         var password = req.body.password;
 
-        if (!email|| !password) {
+        if (!email || !password) {
             return res.send(401);
         }
 
@@ -28,10 +28,9 @@ router
             delete user.password;
 
             var token = jwt.sign(user, secret, { expiresInMinutes: 60 });
-            return res.json({token:token, user: user});
+            return res.json({token: token, user: user});
         });
-    })
-;
+    });
 
 module.exports = router;
 module.exports.secret = secret;

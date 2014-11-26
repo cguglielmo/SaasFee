@@ -1,28 +1,28 @@
-'use strict';
-
 angular.module('saasFeeApp')
     .factory('repository', function ($http, $q, socket, util, auth) {
+        'use strict';
+
         var reddits;
 
         // TODO: umbenennen: "get"
-        var loadData = function(url, success) {
+        var loadData = function (url, success) {
             $http.get(url).
                 success(function (data, status) {
                     console.log('request succeeded');
                     success(data, status);
                 }).
-                error(function(data, status) {
+                error(function (data, status) {
                     console.log('request errored: ' + status + ' / ' + data);
                 });
         };
         // TODO: umbenennen: "post"
-        var addData = function(url, data, success) {
+        var addData = function (url, data, success) {
             $http.post(url, data).
                 success(function (data, status) {
                     console.log('request succeeded');
                     success(data, status);
                 }).
-                error(function(data, status) {
+                error(function (data, status) {
                     console.log('request errored: ' + status + ' / ' + data);
                 });
         };
@@ -33,14 +33,14 @@ angular.module('saasFeeApp')
             }
         }
 
-        var loadReddits = function() {
+        var loadReddits = function () {
             var deferred = $q.defer();
 
-            if(!reddits) {
+            if (!reddits) {
                 reddits = [];
                 loadData('/data/reddits', function (data, status) {
                     var reddit;
-                    for (var i in data) {
+                    for (var i = 0; i < data.length; i++) {
                         reddit = data[i];
                         prepareReddit(reddit);
                         reddits.unshift(reddit);
@@ -53,11 +53,11 @@ angular.module('saasFeeApp')
             return deferred.promise;
         };
 
-        var getReddits = function() {
+        var getReddits = function () {
             return reddits;
         };
 
-        var addReddit = function(reddit) {
+        var addReddit = function (reddit) {
             if (!auth.isLoggedIn()) {
                 auth.redirectToLogin();
                 return;
@@ -65,16 +65,16 @@ angular.module('saasFeeApp')
 
             prepareReddit(reddit);
             reddits.unshift(reddit);
-            addData('/data/reddits', reddit, function(redditId, status) {
+            addData('/data/reddits', reddit, function (redditId, status) {
                 reddit._id = redditId;
                 socket.emit('reddit:new', { redditId: redditId });
             });
         };
 
-        var getComments = function(reddit) {
-            if(!reddit.comments) {
+        var getComments = function (reddit) {
+            if (!reddit.comments) {
                 reddit.comments = [];
-                loadData('/data/reddits/' + reddit._id + '/comments', function(data, status) {
+                loadData('/data/reddits/' + reddit._id + '/comments', function (data, status) {
                     var comment;
                     for (var commentId in data) {
                         if (data.hasOwnProperty(commentId)) {
@@ -89,7 +89,7 @@ angular.module('saasFeeApp')
             return reddit.comments;
         };
 
-        var addComment = function(reddit, comment) {
+        var addComment = function (reddit, comment) {
             if (!auth.isLoggedIn()) {
                 auth.redirectToLogin();
                 return;
@@ -97,16 +97,16 @@ angular.module('saasFeeApp')
 
             reddit.commentCount++;
             reddit.comments.unshift(comment);
-            addData('/data/reddits/' + reddit._id + '/comments', comment, function(commentId, status) {
+            addData('/data/reddits/' + reddit._id + '/comments', comment, function (commentId, status) {
                 comment._id = commentId;
             });
         };
 
-        var registerUser = function(user, success, error) {
-            addData('/data/users', user, function(response, status) {
+        var registerUser = function (user, success, error) {
+            addData('/data/users', user, function (response, status) {
                 if (response.errors) {
                     error(response.errors);
-                }else {
+                } else {
                     user._id = response;
                     success(user);
                 }
@@ -114,7 +114,6 @@ angular.module('saasFeeApp')
         };
 
         socket.on('reddit:new', function (data) {
-            console.log('reddit:new ' + data);
             loadData('/data/reddits/' + data.redditId, function (reddit, status) {
                 prepareReddit(reddit);
                 reddits.unshift(reddit);

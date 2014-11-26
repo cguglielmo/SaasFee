@@ -1,25 +1,23 @@
-'use strict';
-
 angular.module('saasFeeApp')
-  .controller('NewCommentCtrl', function ($scope, repository) {
-    var currentUser = 'bko';
-    $scope.submit = addComment;
+    .controller('NewCommentCtrl', function ($scope, repository) {
+        'use strict';
 
-    function addComment(reddit, commentIn) {
-        var comment = angular.copy(commentIn);
+        var currentUser = 'bko';
+        $scope.submit = addComment;
 
-        comment.date =  new Date();
-        comment.author = currentUser;
-        comment.rating = 0;
+        function addComment(reddit, commentIn) {
+            var comment = angular.copy(commentIn);
 
-        repository.addComment(reddit, comment);
-        // reset form
-        angular.copy({}, commentIn);
-    }
+            comment.date = new Date();
+            comment.author = currentUser;
+            comment.rating = 0;
 
-    function toggleNewRedditBox() {
-        $scope.creatingNewReddit = !$scope.creatingNewReddit;
-    }
+            repository.addComment(reddit, comment);
+            // reset form
+            angular.copy({}, commentIn);
+        }
 
-
-  });
+        function toggleNewRedditBox() {
+            $scope.creatingNewReddit = !$scope.creatingNewReddit;
+        }
+    });
