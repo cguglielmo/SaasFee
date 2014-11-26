@@ -12,7 +12,7 @@
                 <button class="ratingDown" ng-click="rateDown(reddit)"></button>
             </div>
             <h1 reddittitle reddit="reddit"></h1>
-            <div class="details">{{reddit.profile}} {{reddit.date}}</div>
+            <div class="details">{{reddit.profile}} {{reddit.date | datetime}}</div>
             <p redditcontent reddit="reddit"></p>
             <div class="actionBar">
                 <button class="newComment" ng-click="toggleComments(reddit)"><span>{{ reddit.displayingComments && 'Ausblenden' || 'Kommentare' }}</span><span class="commentCount" ng-bind="reddit.commentCount"></span></button>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="comment" ng-repeat="comment in reddit.comments">
-                <div class="commentDetails"><a ng-href="profile/{{comment.author}}" ng-bind="comment.author"></a> <span ng-bind="comment.date"></span></div>
+                <div class="commentDetails"><a ng-href="profile/{{comment.author}}" ng-bind="comment.author"></a> <span ng-bind="comment.date | datetime"></span></div>
                 <p ng-bind="comment.text"></p>
                 <div class="commentActionBar">
                     <div class="commentRating">

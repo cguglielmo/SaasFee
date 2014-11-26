@@ -30,4 +30,9 @@ angular
       .otherwise({
         redirectTo: '/reddits/newest'
       });
+  })
+  .filter('datetime', function ($filter) {
+    return function(dateToFormat){
+      return $filter('date')(dateToFormat, 'dd.MM.yyyy HH:mm');
+    };
   });
