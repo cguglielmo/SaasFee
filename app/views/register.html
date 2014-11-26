@@ -9,7 +9,7 @@
         <p class="error" ng-bind="error.message"></p>
     </div>
     <p>
-        <button ng-click="form.$valid && submit(user)" id="userSubmit">Registrieren</button>
+        <button class="formButton" ng-click="form.$valid && submit(user)" id="userSubmit">Registrieren</button>
     </p>
 </form>
 <div ng-show="registrationSuccessful">

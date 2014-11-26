@@ -22,9 +22,9 @@
         </div>
         <div class="comments" ng-show="reddit.displayingComments">
             <div class="newCommentBox" ng-controller="NewCommentCtrl">
-                <textarea class="commentField" placeholder="Kommentar erfassen" ng-model="comment.text"></textarea><br>
+                <textarea class="commentField" placeholder="Hier kannst du einen Kommentar erfassen" ng-model="comment.text"></textarea><br>
                 <p>
-                    <button class="commentSubmit" ng-click="submit(reddit, comment)">Erfassen</button>
+                    <button class="formButton" class="commentSubmit" ng-click="submit(reddit, comment)">Kommentar hinzufügen</button>
                 </p>
             </div>
 
