@@ -1,10 +1,10 @@
 <form name="form" id="registerUserForm" ng-hide="registrationSuccessful">
     <h2>Hallo unbekannter Benutzer!</h2>
     <p>Es sind nur ganz wenige Angaben nötig, um Mitglied bei SaasFee zu werden.</p>
-    <input ng-model="user.name" type="text" name="userName" id="userNameField" placeholder="Name" required><br>
-    <input ng-model="user.prename" type="text" name="prename" id="userPrenameField" placeholder="Prename" required><br>
+    <input ng-model="user.name" type="text" name="userName" id="userNameField" placeholder="Nachname" required><br>
+    <input ng-model="user.prename" type="text" name="prename" id="userPrenameField" placeholder="Vorname" required><br>
     <input ng-model="user.email" type="email" name="email" id="userEmailField" placeholder="E-Mail" required><br>
-    <input ng-model="user.password" type="password" id="userPassword" placeholder="Password" required><br>
+    <input ng-model="user.password" type="password" id="userPassword" placeholder="Passwort" required><br>
     <div class="errors" ng-show="errors.length > 0" ng-repeat="error in errors">
         <p class="error" ng-bind="error.message"></p>
     </div>
