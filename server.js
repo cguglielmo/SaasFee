@@ -18,34 +18,24 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 app.use('/auth', auth);
 app.use('/data', data);
 
-/// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    /*var err = new Error('Not Found');
+// catch 404 and forward to error handler
+app.use('*', function(req, res, next) {
+    var err = new Error('Not Found');
     err.status = 404;
-    next(err);*/
-    res.send('Not Found');
+    next(err);
 });
 
-/*
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        console.log("bbbb");
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    console.log("bbbb");
-});
+    var status = err.status || 500;
+    var resMessage = 'oops! something broke';
+    if (status === 404) {
+        resMessage = err.message;
+    }
+    debug('Error while handling: ' + req.originalUrl, err);
 
-*/
+    res.status(status);
+    res.send(resMessage);
+});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -55,5 +45,3 @@ var server = app.listen(app.get('port'), function() {
 
 var io = socketIo.listen(server);
 require('./server/routes/socket')(io);
-
-debug('Test');
