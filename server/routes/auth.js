@@ -1,3 +1,4 @@
+var debug = require('debug')('reddit:auth');
 var express = require('express');
 var router = express.Router();
 var path = require('path');
@@ -17,7 +18,7 @@ router
 
         db.users.findOne({email: email}, function (err, user) {
             if (err) {
-                console.log(err);
+                debug(err);
                 return res.send(401);
             }
             if (!user || user.password !== password) {
