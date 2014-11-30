@@ -57,6 +57,7 @@ router
         });
     })
     /*
+    TODO
      /reddits/:reddit_id/rating?mode="up"/"down" PUT
 
      /reddits/:reddit_id/comments/:comment_id/rating?mode="up"/"down" PUT
