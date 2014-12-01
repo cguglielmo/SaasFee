@@ -56,6 +56,11 @@ router
             });
         });
     })
+    .get('/reddits/:reddit_id/comments/:comment_id', function (req, res) {
+        db.comments.findOne({_id: req.params.comment_id}, function (err, comment) {
+            res.send(comment);
+        });
+    })
     /*
     TODO
      /reddits/:reddit_id/rating?mode="up"/"down" PUT

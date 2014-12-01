@@ -97,6 +97,7 @@ angular.module('saasFeeApp')
             reddit.comments.unshift(comment);
             httpPost('/data/reddits/' + reddit._id + '/comments', comment, function (commentId, status) {
                 comment._id = commentId;
+                socket.emit('comment:new', { redditId: reddit._id, commentId: commentId });
             });
         };
 
@@ -117,7 +118,21 @@ angular.module('saasFeeApp')
                 reddits.unshift(reddit);
             });
         });
-        // TODO: weitere socket.on --> comment:new, reddit:rating, comment:rating
+
+        socket.on('comment:new', function (data) {
+            httpGet('/data/reddits/' + data.redditId + '/comments/' + data.commentId, function (comment, status) {
+                var reddit;
+                for (var i = 0; i < reddits.length; i++) {
+                    if (reddits[i]._id === data.redditId) {
+                        reddit = reddits[i];
+                        break;
+                    }
+                }
+                reddit.commentCount++;
+                reddit.comments.unshift(comment);
+            });
+        });
+        // TODO: weitere socket.on --> reddit:rating, comment:rating
 
         return {
             getReddits: getReddits,
