@@ -1,7 +1,11 @@
-<div id="loginBox">
-    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail"><br>
-    <input ng-model="user.password" type="password" id="userPassword" placeholder="Passwort"><br>
+<form id="loginBox" name="loginForm">
+    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" required><br>
+    <input ng-model="user.password" type="password" id="userPassword" placeholder="Passwort" required><br>
     <p class="error" ng-show="error" ng-bind="error"></p>
-    <button class="loginButton" ng-click="login(user);" id="loginButton">Login</button>
-    <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p></a>
-</div>
+    <p>
+        <button class="formButton" ng-click="loginForm.$valid && login(user);" id="loginButton">Login</button>
+    </p>
+    <p>
+        <a href="#register">Noch nicht registriert?</a>
+    </p>
+</form>

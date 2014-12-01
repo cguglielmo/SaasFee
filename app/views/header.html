@@ -5,12 +5,12 @@
 </div>
 
 <button dropdown id="login" class="headerButton" ng-show="!currentUser">Anmelden</button>
-<div id="loginDropdownBox" class="dropdown-box right" style="display:none">
-    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" ng-click="$event.stopPropagation()"><br>
-    <input ng-model="user.password" type="password" id="userPassword" placeholder="Password" ng-click="$event.stopPropagation()"><br>
-    <button class="loginButton" ng-click="login(user);" id="loginButton">Login</button>
+<form id="loginDropdownBox" name="dropDownLoginForm" class="dropdown-box right" style="display:none">
+    <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" ng-click="$event.stopPropagation()" required><br>
+    <input ng-model="user.password" type="password" id="userPassword" placeholder="Passwort" ng-click="$event.stopPropagation()" required><br>
+    <button class="loginButton" ng-click="login($event, dropDownLoginForm.$valid, user);" id="loginButton">Login</button>
     <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p></a>
-</div>
+</form>
 
 <button dropdown id="profile" class="headerButton" ng-show="currentUser"><img src="images/user.png"></button>
 <div id="profileDropdownBox" class="dropdown-box right" style="display:none">

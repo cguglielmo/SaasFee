@@ -119,9 +119,10 @@ input.ng-invalid-email-already-registered {
 
 .loginButton,
 .logoutButton{
+    height: 30px;
     border: none;
+    background-color: rgb(135, 180, 155);
     color: white;
-    background-color: green;
     width: 100%;
     padding: 5px;
     margin-top: 5px;
@@ -182,6 +183,11 @@ input.ng-invalid-email-already-registered {
 .newCommentBox p {
     margin-top: 4px;
     margin-bottom: 4px;
+}
+
+#loginBox p {
+    margin-top: 9px;
+    margin-bottom: 9px;
 }
 
 input, textarea {

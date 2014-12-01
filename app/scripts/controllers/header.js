@@ -14,7 +14,11 @@ angular.module('saasFeeApp')
             $scope.category = message.categoryName;
         });
 
-        function login(userIn) {
+        function login(event, valid, userIn) {
+            if (!valid) {
+                event.stopPropagation();
+                return;
+            }
             var user = angular.copy(userIn);
 
             auth.login({email: user.email, password: user.password}, error);
