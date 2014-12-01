@@ -1,8 +1,17 @@
 angular.module('saasFeeApp')
-    .factory('repository', function ($http, $q, socket, util, auth) {
+    .factory('repository', function ($http, $q, socket, util, auth, $rootScope) {
         'use strict';
 
         var reddits;
+        var ratingsLoaded;
+
+        $rootScope.$on('login', function () {
+            loadRatings();
+        });
+
+        $rootScope.$on('logout', function () {
+            clearUserData();
+        });
 
         var httpGet = function (url, success) {
             $http.get(url).
@@ -45,6 +54,10 @@ angular.module('saasFeeApp')
                     }
                     deferred.resolve(reddits);
                 });
+
+                if (auth.isLoggedIn()) {
+                    loadRatings();
+                }
             } else {
                 deferred.resolve(reddits);
             }
@@ -54,6 +67,14 @@ angular.module('saasFeeApp')
         var getReddits = function () {
             return reddits;
         };
+
+        function getRedditById(id) {
+            for (var i=0; i < reddits.length; i++) {
+                if (reddits[i]._id === id) {
+                    return reddits[i];
+                }
+            }
+        }
 
         var addReddit = function (reddit) {
             if (!auth.isLoggedIn()) {
@@ -66,6 +87,34 @@ angular.module('saasFeeApp')
             httpPost('/data/reddits', reddit, function (redditId, status) {
                 reddit._id = redditId;
                 socket.emit('reddit:new', { redditId: redditId });
+            });
+        };
+
+        var updateRedditRating = function (reddit, value) {
+            if (!auth.isLoggedIn()) {
+                auth.redirectToLogin();
+                return;
+            }
+            if (reddit.userRating !== undefined && reddit.userRating === value) {
+                // already rated
+                return;
+            }
+
+            if (reddit.userRating !== undefined) {
+                reddit.userRating += value;
+            } else {
+                reddit.userRating = value;
+            }
+            reddit.rating += value;
+
+            var user = auth.getCurrentUser();
+            httpPost('/data/reddits/' + reddit._id,
+                {
+                    userRating: reddit.userRating,
+                    ratingValue: value
+                },
+                function (redditId, status) {
+                  console.log('rating updated with ' + reddit.userRating);
             });
         };
 
@@ -86,6 +135,34 @@ angular.module('saasFeeApp')
             }
             return reddit.comments;
         };
+
+        var loadRatings = function () {
+            if (ratingsLoaded) {
+                return;
+            }
+
+            httpGet('/data/ratings', function (data, status) {
+                var rating, reddit;
+
+                for (var ratingId in data) {
+                    if (data.hasOwnProperty(ratingId)) {
+                        rating = data[ratingId];
+                        reddit = getRedditById(rating.redditId);
+                        reddit.userRating = rating.value;
+                    }
+                }
+                ratingsLoaded = true;
+            });
+        };
+
+        var clearUserData = function () {
+            if (reddits) {
+                for (var i=0; i < reddits.length;i++) {
+                    reddits[i].userRating = null;
+                }
+            }
+            ratingsLoaded = false;
+        }
 
         var addComment = function (reddit, comment) {
             if (!auth.isLoggedIn()) {
@@ -138,8 +215,10 @@ angular.module('saasFeeApp')
             getReddits: getReddits,
             loadReddits: loadReddits,
             addReddit: addReddit,
+            updateRedditRating: updateRedditRating,
             getComments: getComments,
             addComment: addComment,
-            registerUser: registerUser
+            registerUser: registerUser,
+            clearUserData: clearUserData
         };
     });

@@ -256,6 +256,10 @@ textarea {
     width: 100%;
 }
 
+.redditContent {
+    min-height: 90px;
+}
+
 .formButton {
     height: 30px;
     border: none;
@@ -300,16 +304,30 @@ textarea {
     margin: 0 auto;
 }
 
-.ratingUp::before {
-    content: url("../images/rating_up.png");
+.ratingUp::before, .ratingDown::before {
     width: 18px;
     height: 18px;
 }
 
+.ratingUp::before {
+    content: url("../images/rating_up.png");
+}
+
+.ratingUpDone::before {
+    content: url("../images/rating_up_done.png");
+}
+
 .ratingDown::before {
     content: url("../images/rating_down.png");
-    width: 18px;
-    height: 18px;
+}
+
+.ratingDownDone::before {
+    content: url("../images/rating_down_done.png");
+}
+
+button.ratingDownDone,
+button.ratingUpDone{
+  cursor: default;
 }
 
 .actionBar {

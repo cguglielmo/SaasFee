@@ -23,11 +23,11 @@ angular.module('saasFeeApp')
         $scope.commentRateDown = commentRateDown;
 
         function rateUp(reddit) {
-            reddit.rating++;
+            repository.updateRedditRating(reddit, 1);
         }
 
         function rateDown(reddit) {
-            reddit.rating--;
+            repository.updateRedditRating(reddit, -1);
         }
 
         function commentRateUp(comment) {

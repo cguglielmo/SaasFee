@@ -5,8 +5,8 @@ var rootPath = path.resolve(process.cwd(), '..');
 var db = require('../data/database');
 var expressJwt = require('express-jwt');
 var auth = require('./auth');
+var debug = require('debug')('reddit:data');
 
-/* GET data listing. */
 router
     .post('/users', function (req, res) {
         var user = req.body;
@@ -31,6 +31,12 @@ router
             res.send(reddits);
         });
     })
+    .get('/ratings',  expressJwt({secret: auth.secret}), function (req, res) {
+        var userId = req.user.email;
+        db.ratings.find({userId: userId}, function (err, ratings) {
+            res.send(ratings);
+        });
+    })
     .post('/reddits', expressJwt({secret: auth.secret}), function (req, res) {
         db.reddits.insert(req.body, function (err, reddit) {
             res.send(reddit._id);
@@ -39,6 +45,40 @@ router
     .get('/reddits/:reddit_id', function (req, res) {
         db.reddits.findOne({_id: req.params.reddit_id}, function (err, reddit) {
             res.send(reddit);
+        });
+    })
+    .post('/reddits/:reddit_id', expressJwt({secret: auth.secret}), function (req, res) {
+        var redditId = req.params.reddit_id;
+        var userRating = req.body.userRating;
+        var ratingValue = req.body.ratingValue;
+
+        var userId = req.user.email;
+
+        db.ratings.findOne({redditId: redditId, userId: userId}, function (err, rating) {
+            if (rating !== null && rating.value === userRating) {
+                //Already rated with the same value -> do nothing
+                debug('already rated with same value. user: ' + userId);
+                res.send(200);
+                return;
+            }
+            if (rating === null) {
+                rating = {
+                    redditId: redditId,
+                    userId: userId,
+                    value: userRating
+                };
+                db.ratings.insert(rating, function (err, rating) {
+                    debug('new rating inserted with value' + rating.value);
+                });
+            } else {
+                db.ratings.update({_id: rating._id}, { $set: { value: userRating } }, {}, function (err) {
+                    debug('rating with id ' + rating._id + ' updated with new rating: ' + userRating);
+                });
+            }
+            db.reddits.update({_id: redditId}, { $inc: { rating: ratingValue } }, {}, function (err) {
+                debug('rating of reddit with id ' + redditId + ' increased by: ' + ratingValue);
+            });
+            res.send(200);
         });
     })
     .get('/reddits/:reddit_id/comments', function (req, res) {
@@ -63,8 +103,6 @@ router
     })
     /*
     TODO
-     /reddits/:reddit_id/rating?mode="up"/"down" PUT
-
      /reddits/:reddit_id/comments/:comment_id/rating?mode="up"/"down" PUT
      */
 ;

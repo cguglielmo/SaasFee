@@ -7,9 +7,9 @@
     <article class="reddit" ng-repeat="reddit in reddits | orderBy:predicate:reverse">
         <div class="redditContent">
             <div class="rating">
-                <button class="ratingUp" ng-click="rateUp(reddit)"></button>
+                <button ng-class="reddit.userRating > 0 ? 'ratingUpDone' : 'ratingUp'" ng-click="rateUp(reddit)"></button>
                 <div class="ratingValue" ng-bind="reddit.rating"></div>
-                <button class="ratingDown" ng-click="rateDown(reddit)"></button>
+                <button ng-class="reddit.userRating < 0 ? 'ratingDownDone' : 'ratingDown'" ng-click="rateDown(reddit)"></button>
             </div>
             <h1 reddittitle reddit="reddit"></h1>
             <div class="details">{{reddit.profile}} {{reddit.date | datetime}}</div>

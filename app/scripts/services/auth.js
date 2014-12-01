@@ -1,5 +1,5 @@
 angular.module('saasFeeApp')
-    .factory('auth', function ($http, $window, $location) {
+    .factory('auth', function ($http, $window, $location, $rootScope) {
         'use strict';
 
         var currentUser = loadCurrentUserFromSessionStorage();
@@ -13,6 +13,7 @@ angular.module('saasFeeApp')
                     persistUserInSessionStorage(currentUser);
 
                     $location.path('/');
+                    $rootScope.$broadcast('login');
                 })
                 .error(function () {
                     error(errorMessage);
@@ -22,6 +23,7 @@ angular.module('saasFeeApp')
         var logout = function (user) {
             currentUser = null;
             removeCurrentUserFromSessionStorage();
+            $rootScope.$broadcast('logout');
         };
 
         var getCurrentUser = function () {
@@ -80,7 +82,7 @@ angular.module('saasFeeApp')
         };
     })
 
-    .factory('authInterceptor', function ($rootScope, $q, $window) {
+    .factory('authInterceptor', function ($rootScope, $q, $window, $injector) {
         'use strict';
 
         return {
@@ -92,13 +94,9 @@ angular.module('saasFeeApp')
                 }
                 return config;
             },
-            response: function (response) {
-                if (response.status === 401) {
-                    delete $window.sessionStorage.token;
-                    delete $window.sessionStorage.currentUserEmail;
-                    delete $window.sessionStorage.currentUserName;
-                    delete $window.sessionStorage.currentUserPrename;
-                }
+            responseError: function (response) {
+                var auth = $injector.get('auth');
+                auth.logout();
                 return response || $q.when(response);
             }
         };
