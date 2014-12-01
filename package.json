@@ -1,32 +1,34 @@
 {
-  "name": "SaasFee",
-  "version": "0.0.1",
-  "dependencies": {
-    "body-parser": "~1.0.1",
-    "debug": "~0.7.4",
-    "express": "~4.2.0",
-    "express-jwt": "^0.5.0",
-    "jsonwebtoken": "^1.1.2",
-    "morgan": "~1.0.0",
-    "nedb": "~0.11.1",
-    "socket.io": "^1.2.1"
-  },
-  "devDependencies": {
-    "karma": "~0.12",
-    "karma-jasmine": "~0.2.3",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-cli": "~0.0",
-    "karma-coverage": "~0.2.4"
-  },
-  "scripts": {
-    "postinstall": "bower install",
-    "test": "karma start test/karma.conf.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cguglielmo/SaasFee.git"
-  },
-  "directories": {
-    "test": "test"
-  }
+    "name": "SaasFee",
+    "version": "0.0.1",
+    "dependencies": {
+        "body-parser": "~1.0.1",
+        "debug": "~0.7.4",
+        "express": "~4.2.0",
+        "express-jwt": "^0.5.0",
+        "jsonwebtoken": "^1.1.2",
+        "morgan": "~1.0.0",
+        "nedb": "~0.11.1",
+        "socket.io": "^1.2.1"
+    },
+    "devDependencies": {
+        "karma": "~0.12",
+        "karma-jasmine": "~0.2.3",
+        "karma-phantomjs-launcher": "^0.1.4",
+        "karma-cli": "~0.0",
+        "karma-coverage": "~0.2.4"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "test": "karma start test/karma.conf.js",
+        "start": "node server.js",
+        "init-data": "node server/data/initSampleData.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cguglielmo/SaasFee.git"
+    },
+    "directories": {
+        "test": "test"
+    }
 }

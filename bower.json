@@ -1,25 +1,25 @@
 {
-  "name": "SaasFee",
-  "version": "0.0.1",
-  "authors": [
-    "Bruno <bruno.koeferli@hsr.ch>",
-    "Claudio <claudio.guglielmo@hsr.ch>"
-  ],
-  "dependencies": {
-    "angular": "~1.2.0",
-    "json3": "~3.3.1",
-    "es5-shim": "~3.1.0",
-    "angular-resource": "~1.2.0",
-    "angular-cookies": "~1.2.0",
-    "angular-sanitize": "~1.2.0",
-    "angular-animate": "~1.2.0",
-    "angular-touch": "~1.2.0",
-    "angular-route": "~1.2.0",
-    "jquery": "~2.1.1"
-  },
-  "devDependencies": {
-    "angular-mocks": "~1.2.0",
-    "angular-scenario": "~1.2.0"
-  },
-  "appPath": "app"
+    "name": "SaasFee",
+    "version": "0.0.1",
+    "authors": [
+        "Bruno <bruno.koeferli@hsr.ch>",
+        "Claudio <claudio.guglielmo@hsr.ch>"
+    ],
+    "dependencies": {
+        "angular": "~1.2.0",
+        "json3": "~3.3.1",
+        "es5-shim": "~3.1.0",
+        "angular-resource": "~1.2.0",
+        "angular-cookies": "~1.2.0",
+        "angular-sanitize": "~1.2.0",
+        "angular-animate": "~1.2.0",
+        "angular-touch": "~1.2.0",
+        "angular-route": "~1.2.0",
+        "jquery": "~2.1.1"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.0",
+        "angular-scenario": "~1.2.0"
+    },
+    "appPath": "app"
 }
