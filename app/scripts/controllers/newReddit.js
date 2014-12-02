@@ -2,7 +2,7 @@ angular.module('saasFeeApp')
     .controller('NewRedditCtrl', function ($scope, repository, auth) {
         'use strict';
 
-        var currentUser = 'bko';
+        var currentUser = auth.getCurrentUser();
         $scope.submit = addReddit;
         $scope.creatingNewReddit = false;
         $scope.toggleNewRedditBox = toggleNewRedditBox;
@@ -11,7 +11,7 @@ angular.module('saasFeeApp')
             var reddit = angular.copy(redditIn);
 
             reddit.date = new Date().toJSON();
-            reddit.author = currentUser;
+            reddit.author = currentUser.prename;
             reddit.rating = 0;
             reddit.commentCount = 0;
 
