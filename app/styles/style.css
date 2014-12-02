@@ -318,7 +318,7 @@ textarea {
     padding-bottom: 10px;
 }
 
-.ratingUp, .ratingDown {
+.ratingChange {
     padding: 0;
     margin: 0 auto;
 }

@@ -7,9 +7,9 @@
     <article class="reddit" ng-repeat="reddit in reddits | orderBy:predicate:reverse">
         <div class="redditContent">
             <div class="rating">
-                <button ng-class="reddit.userRating > 0 ? 'ratingUpDone' : 'ratingUp'" ng-click="rateUp(reddit)"></button>
+                <button class="ratingChange" ng-class="reddit.userRating > 0 ? 'ratingUpDone' : 'ratingUp'" ng-click="rateUp(reddit)"></button>
                 <div class="ratingValue" ng-bind="reddit.rating"></div>
-                <button ng-class="reddit.userRating < 0 ? 'ratingDownDone' : 'ratingDown'" ng-click="rateDown(reddit)"></button>
+                <button class="ratingChange" ng-class="reddit.userRating < 0 ? 'ratingDownDone' : 'ratingDown'" ng-click="rateDown(reddit)"></button>
             </div>
             <h1 reddittitle reddit="reddit"></h1>
             <div class="details">{{reddit.profile}} {{reddit.date | datetime}}</div>
@@ -33,9 +33,9 @@
                 <p ng-bind="comment.text"></p>
                 <div class="commentActionBar">
                     <div class="commentRating">
-                        <button class="ratingUp" ng-click="commentRateUp(comment)"></button>
+                        <button class="ratingChange ratingUp" ng-click="commentRateUp(comment)"></button>
                         <div class="ratingValue" ng-bind="comment.rating"></div>
-                        <button class="ratingDown" ng-click="commentRateDown(comment)"></button>
+                        <button class="ratingChange ratingDown" ng-click="commentRateDown(comment)"></button>
                     </div>
                 </div>
                 <div class="hr" ng-show="!$last"></div>
