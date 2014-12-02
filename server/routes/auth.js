@@ -2,7 +2,6 @@ var debug = require('debug')('reddit:auth');
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var rootPath = path.resolve(process.cwd(), '..');
 var db = require('../data/database');
 var secret = "VerySecureSecret_az342ckasfjio5128x";
 var jwt = require('jsonwebtoken');

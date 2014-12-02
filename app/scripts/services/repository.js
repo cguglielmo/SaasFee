@@ -69,7 +69,7 @@ angular.module('saasFeeApp')
         };
 
         function getRedditById(id) {
-            for (var i=0; i < reddits.length; i++) {
+            for (var i = 0; i < reddits.length; i++) {
                 if (reddits[i]._id === id) {
                     return reddits[i];
                 }
@@ -107,15 +107,13 @@ angular.module('saasFeeApp')
             }
             reddit.rating += value;
 
-            var user = auth.getCurrentUser();
             httpPost('/data/reddits/' + reddit._id,
                 {
                     userRating: reddit.userRating,
                     ratingValue: value
                 },
                 function (redditId, status) {
-                  console.log('rating updated with ' + reddit.userRating);
-            });
+                });
         };
 
         var getComments = function (reddit) {
@@ -157,12 +155,12 @@ angular.module('saasFeeApp')
 
         var clearUserData = function () {
             if (reddits) {
-                for (var i=0; i < reddits.length;i++) {
+                for (var i = 0; i < reddits.length; i++) {
                     reddits[i].userRating = null;
                 }
             }
             ratingsLoaded = false;
-        }
+        };
 
         var addComment = function (reddit, comment) {
             if (!auth.isLoggedIn()) {

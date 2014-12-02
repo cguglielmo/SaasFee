@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var rootPath = path.resolve(process.cwd(), '..');
 var db = require('../data/database');
 var expressJwt = require('express-jwt');
 var auth = require('./auth');

@@ -17,7 +17,6 @@ angular.module('saasFeeApp')
             }
 
             function fail(errors) {
-                var errorMsg = '';
                 var error;
 
                 for (var i = 0; i < errors.length; i++) {

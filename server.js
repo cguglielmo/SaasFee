@@ -6,7 +6,6 @@ var socketIo = require('socket.io');
 
 var data = require('./server/routes/data');
 var auth = require('./server/routes/auth');
-var jwt = require('jsonwebtoken');
 
 var app = express();
 

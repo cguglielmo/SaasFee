@@ -1,4 +1,4 @@
-<div ng-controller="NewRedditCtrl" ng-include src="url"></div>
+<div ng-controller="NewRedditCtrl" ng-include src="'views/newReddit.html'"></div>
 <div id="reddits" >
     <div id="blankSlate" ng-if="reddits.length === 0">
       <img src="../images/blank_slate.png">
@@ -24,7 +24,7 @@
             <div class="newCommentBox" ng-controller="NewCommentCtrl">
                 <textarea class="commentField" placeholder="Hier kannst du einen Kommentar erfassen" ng-model="comment.text"></textarea><br>
                 <p>
-                    <button class="formButton" class="commentSubmit" ng-click="submit(reddit, comment)">Kommentar hinzufügen</button>
+                    <button class="formButton commentSubmit" ng-click="submit(reddit, comment)">Kommentar hinzufügen</button>
                 </p>
             </div>
 

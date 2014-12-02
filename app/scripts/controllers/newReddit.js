@@ -1,9 +1,8 @@
 angular.module('saasFeeApp')
-    .controller('NewRedditCtrl', function ($scope, repository, auth, $location) {
+    .controller('NewRedditCtrl', function ($scope, repository, auth) {
         'use strict';
 
         var currentUser = 'bko';
-        $scope.url = 'views/newReddit.html';
         $scope.submit = addReddit;
         $scope.creatingNewReddit = false;
         $scope.toggleNewRedditBox = toggleNewRedditBox;
