@@ -33,9 +33,9 @@
                 <p ng-bind="comment.text"></p>
                 <div class="commentActionBar">
                     <div class="commentRating">
-                        <button class="ratingChange ratingUp" ng-click="commentRateUp(comment)"></button>
+                        <button class="ratingChange" ng-class="comment.userRating > 0 ? 'ratingUpDone' : 'ratingUp'"  ng-click="commentRateUp(reddit, comment)"></button>
                         <div class="ratingValue" ng-bind="comment.rating"></div>
-                        <button class="ratingChange ratingDown" ng-click="commentRateDown(comment)"></button>
+                        <button class="ratingChange" ng-class="comment.userRating < 0 ? 'ratingDownDone' : 'ratingDown'"  ng-click="commentRateDown(reddit, comment)"></button>
                     </div>
                 </div>
                 <div class="hr" ng-show="!$last"></div>

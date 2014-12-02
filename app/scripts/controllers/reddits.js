@@ -30,12 +30,12 @@ angular.module('saasFeeApp')
             repository.updateRedditRating(reddit, -1);
         }
 
-        function commentRateUp(comment) {
-            comment.rating++;
+        function commentRateUp(reddit, comment) {
+            repository.updateCommentRating(reddit, comment, 1);
         }
 
-        function commentRateDown(comment) {
-            comment.rating--;
+        function commentRateDown(reddit, comment) {
+            repository.updateCommentRating(reddit, comment, -1);
         }
 
         function toggleComments(reddit) {
