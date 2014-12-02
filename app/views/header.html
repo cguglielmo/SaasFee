@@ -8,7 +8,7 @@
 <form id="loginDropdownBox" name="dropDownLoginForm" class="dropdown-box right" style="display:none">
     <input ng-model="user.email" type="text" id="userEmailField" placeholder="E-Mail" ng-click="$event.stopPropagation()" required><br>
     <input ng-model="user.password" type="password" id="userPassword" placeholder="Passwort" ng-click="$event.stopPropagation()" required><br>
-    <button class="loginButton" ng-click="login($event, dropDownLoginForm.$valid, user);" id="loginButton">Login</button>
+    <button class="formButton loginButton" ng-click="login($event, dropDownLoginForm.$valid, user);" id="loginButton">Login</button>
     <a href="#register"><p class="notRegisteredYet">Noch nicht registriert?</p></a>
 </form>
 
@@ -18,7 +18,7 @@
         <b>{{currentUser.prename}} {{currentUser.name}}</b><br/>
         {{currentUser.email}}
     </p>
-    <button class="logoutButton" ng-click="logout()" id="logoutButton">Logout</button>
+    <button class="formButton logoutButton" ng-click="logout()" id="logoutButton">Logout</button>
 </div>
 
-<a href="#/"><div id="title">SaasFee</div></a>
+<div id="title"><a href="#/">SaasFee</a></div>

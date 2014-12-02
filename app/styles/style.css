@@ -3,11 +3,11 @@ body {
     margin: 0 auto;
     max-width: 800px;
     min-width: 270px;
-    background-color: rgb(135, 180, 155);
+    background-color: #348350;
 }
 
 a {
-    color: #00B7FF;
+    color: #4A793F;
     text-decoration: none;
 }
 
@@ -29,13 +29,18 @@ input.ng-invalid-email-already-registered {
     background-color: #FFE0E0;
 }
 
+button:focus,
+a:focus {
+    outline-color: #678C5F;
+}
+
 #header {
     box-sizing: border-box;
     width: 100%;
-    border-bottom: 1px solid #777777;
+    border-bottom: 1px solid #ccc;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     position:relative;
 }
 
@@ -65,7 +70,7 @@ input.ng-invalid-email-already-registered {
     margin-left: -1px;
     z-index: 10;
     padding: 0px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     box-shadow: 2px 2px 2px #ccc;
 }
 
@@ -121,10 +126,10 @@ input.ng-invalid-email-already-registered {
 .logoutButton{
     height: 30px;
     border: none;
-    background-color: rgb(135, 180, 155);
+    background-color: #678C5F;
     color: white;
     width: 100%;
-    padding: 5px;
+    padding: 5px 15px;
     margin-top: 5px;
 }
 
@@ -149,7 +154,7 @@ input.ng-invalid-email-already-registered {
     box-sizing: border-box;
     width: 100%;
     padding: 10px 15px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
 }
 
 #newRedditButton {
@@ -202,6 +207,16 @@ input, textarea {
 
 input {
     height: 30px;
+}
+
+input:required,
+textarea:required{
+    box-shadow:none;
+}
+
+input:focus,
+textarea:focus {
+  outline-color: #678C5F;
 }
 
 textarea {
@@ -263,8 +278,14 @@ textarea {
 .formButton {
     height: 30px;
     border: none;
-    background-color: rgb(135, 180, 155);
+    background-color: #678C5F;
     color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.formButton:focus {
+    outline-color: #041500;
 }
 
 .redditContent button,
@@ -273,7 +294,6 @@ textarea {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0px;
 }
 
 .redditContent button:hover,
@@ -347,6 +367,8 @@ button.ratingUpDone{
 
 .actionBar > button {
     margin-right: 5px;
+    padding: 0px;
+    margin-right: 10px;
 }
 
 .actionBar > button:before {
