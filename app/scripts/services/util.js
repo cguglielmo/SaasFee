@@ -30,7 +30,7 @@ angular.module('saasFeeApp')
                 url.path = '';
             }
 
-            url.extension = extractExtension(link);
+            url.extension = extractExtension(url.path);
             url.fullUrl = link;
             return url;
         };

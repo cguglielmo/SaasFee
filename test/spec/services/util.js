@@ -16,16 +16,12 @@ describe('Service: util', function () {
     });
 
     describe('method parseLink', function () {
-        var testParseLink = function (linkToTest, scheme, domain, path) {
+        var testParseLink = function (linkToTest, scheme, domain, path, extension) {
             it('should parse url: ' + linkToTest, function () {
                 var url = util.parseLink(linkToTest);
                 var expectedFullUrl = linkToTest;
-                console.log(expectedFullUrl.indexOf('://'));
-                console.log(expectedFullUrl.search(/^\/\//));
                 if (expectedFullUrl.search(/^\/\//) === 0) {
-                    // special case for embeded youtube links --> TODO
-                    // - http://www.w3schools.com/html/html_youtube.asp
-                    // - https://developers.google.com/youtube/player_parameters#Embedding_a_Player
+                    // special case for embeded youtube links: //www.youtube.com/embed/XfoobarX
                     expectedFullUrl = expectedFullUrl;
                 }
                 else if (expectedFullUrl.search(/^http[s]?\:\/\//) === -1) {
@@ -35,19 +31,18 @@ describe('Service: util', function () {
                 expect(url.scheme).toBe(scheme);
                 expect(url.domain).toBe(domain);
                 expect(url.path).toBe(path);
-                //expect(url.extension).toBe('');
+                expect(url.extension).toBe(extension);
             });
         };
 
         testParseLink('http://www.hsr.ch', 'http', 'www.hsr.ch', '');
         testParseLink('http://www.hsr.ch/test', 'http', 'www.hsr.ch', 'test');
         testParseLink('http://www.hsr.ch/test/foo', 'http', 'www.hsr.ch', 'test/foo');
-        // TODO: testParseLink('http://www.hsr.ch/test/foo.png', 'http', 'www.hsr.ch', 'test/foo', 'png');
+        testParseLink('http://www.hsr.ch/test/foo.png', 'http', 'www.hsr.ch', 'test/foo.png', 'png');
         testParseLink('https://www.hsr.ch', 'https', 'www.hsr.ch', '');
 
         testParseLink('www.hsr.ch', 'http', 'www.hsr.ch', '');
         testParseLink('//www.youtube.com/embed/C-y70ZOSzE0', '//', 'www.youtube.com', 'embed/C-y70ZOSzE0');
-        testParseLink('ftp://www.hsr.ch', 'http', 'www.hsr.ch', '');
     });
 
     describe('method nl2br', function () {
