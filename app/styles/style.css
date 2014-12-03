@@ -300,6 +300,10 @@ textarea {
     text-decoration: underline;
 }
 
+.redditContent img {
+    max-width: 620px;
+}
+
 .details {
     white-space: nowrap;
     font-size: 12px;
