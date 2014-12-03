@@ -78,6 +78,15 @@ angular.module('saasFeeApp')
             }
         }
 
+        function getCommentById(reddit, commentId) {
+            var comments = reddit.comments;
+            for (var i = 0; i < comments.length; i++) {
+                if (comments[i]._id === commentId) {
+                    return comments[i];
+                }
+            }
+        }
+
         var addReddit = function (reddit) {
             if (!auth.isLoggedIn()) {
                 auth.redirectToLogin();
@@ -142,6 +151,7 @@ angular.module('saasFeeApp')
                     ratingValue: value
                 },
                 function (redditId, status) {
+                    socket.emit('comment:rating', { redditId: reddit._id, commentId: comment._id, value: value });
                 });
         };
 
@@ -172,7 +182,7 @@ angular.module('saasFeeApp')
             }
 
             httpGet('/data/ratings', function (data, status) {
-                var rating, reddit, comment;
+                var rating, reddit;
 
                 for (var ratingId in data) {
                     if (data.hasOwnProperty(ratingId)) {
@@ -196,7 +206,7 @@ angular.module('saasFeeApp')
                     getComments(reddits[i]);
                 }
             }
-        }
+        };
 
         var clearUserData = function () {
             ratingsLoaded = false;
@@ -259,7 +269,12 @@ angular.module('saasFeeApp')
                 reddit.comments.unshift(comment);
             });
         });
-        // TODO: weitere socket.on --> comment:rating
+
+        socket.on('comment:rating', function (data) {
+            var reddit = getRedditById(data.redditId);
+            var comment = getCommentById(reddit, data.commentId);
+            comment.rating += data.value;
+        });
 
         return {
             getReddits: getReddits,

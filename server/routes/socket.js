@@ -12,6 +12,9 @@ var socket = function (io) {
         socket.on('comment:new', function (data) {
             socket.broadcast.emit('comment:new', { redditId: data.redditId, commentId: data.commentId });
         });
+        socket.on('comment:rating', function (data) {
+            socket.broadcast.emit('comment:rating', { redditId: data.redditId, commentId: data.commentId, value: data.value });
+        });
     });
 };
 
