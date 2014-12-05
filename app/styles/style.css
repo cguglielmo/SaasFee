@@ -264,6 +264,7 @@ textarea {
 .comments {
     position: relative;
     padding-left: 75px;
+    padding-right: 50px;
     float: left;
     overflow: hidden;
     box-sizing: border-box;
@@ -272,6 +273,10 @@ textarea {
 
 .redditContent {
     min-height: 90px;
+}
+
+.redditContent img{
+    max-width: 100%;
 }
 
 .formButton {
@@ -298,10 +303,6 @@ textarea {
 .redditContent button:hover,
 .comment button:hover {
     text-decoration: underline;
-}
-
-.redditContent img {
-    max-width: 620px;
 }
 
 .details {
@@ -450,6 +451,7 @@ button.ratingUpDone {
     .redditContent,
     .comments {
         padding-left: 0;
+        padding-right: 0;
         width: 100%;
     }
 
